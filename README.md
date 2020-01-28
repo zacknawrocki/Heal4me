@@ -1,6 +1,8 @@
 Feel free to begin working on the README
 
 
+Below is placeholder text because it looked too empty
+
 # Heal4me
 
 ## What is Heal4me
@@ -8,7 +10,7 @@ Feel free to begin working on the README
 
 **Link 1**
 
-**[]Link 2**
+[Link 2]("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
 
 **Link 3**
 
