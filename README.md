@@ -10,7 +10,7 @@ Below is placeholder text because it looked too empty
 
 **Link 1**
 
-[Link 2]("https://www.youtube.com/watch?v=dQw4w9WgXcQ")
+[Link 2](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 **Link 3**
 
