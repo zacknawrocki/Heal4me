@@ -8,7 +8,7 @@ Below is placeholder text because it looked too empty
 ## What is Heal4me
 
 
-**Link 1**
+[Link 1](https://rpi.edu/)
 
 [Link 2](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
