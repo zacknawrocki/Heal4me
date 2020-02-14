@@ -22,7 +22,7 @@ Are you adding a file, removing a file, refactoring a file, better documenting a
 ##### Files Related to Commit
 The files being commited. If everything below a directory was modified/created/removed, feel free to simply give the directory. The files must be listed in [Oxford Comma Format](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
 ##### Further Description
-Finally, describe in more detail what has been done to the file(s) in question.
+Finally, describe in more detail what has been done to the file(s) in question. <br> <br>
 **Together, these commit guidelines look like the following**
 ```
 git commit -m "add | a/new_file.c, a/new_file2.c, a/b/new_file3.c | Three new files were created for the purpose of..."
