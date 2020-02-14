@@ -1,3 +1,3 @@
 {
-    "mongoURI": "mongodb+srv://superuser:<password>@cluster0-cycgb.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://superuser:super123@cluster0-cycgb.mongodb.net/test?retryWrites=true&w=majority"
 }
