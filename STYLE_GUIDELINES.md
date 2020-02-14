@@ -12,6 +12,7 @@ function partyAtHq(num_Heal4Me_users) {
 ```
 
 ### Tabs/Spacing
+Heal4Me uses tabs to organize and format all code. Our definition of a tab consists of 4 spaces.
 
 ### Git Commit Messages
 title, listed in oxford format, description of commit
