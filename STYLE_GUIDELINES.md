@@ -29,7 +29,6 @@ git commit -m "add | a/new_file.c, a/new_file2.c, a/b/new_file3.c | Three new fi
 ```
 
 ### Variable and Function Names
-**Variable Names**
 Both variables and function names are lowercase and underscored, using snake case  style guidleines. Snake case is the practice practice of "writing compound words or phrases in which the elements are separated with one underscore character... and no spaces, with each element's initial letter usually lowercased within the compound and the first letter either upper- or lowercase—as in 'foo_bar' and 'Hello_world'" ([Wikipedia](https://en.wikipedia.org/wiki/Snake_case)). Keep note, however, that as mentioned above, our implementation of snake case variables and functions will strictly be all lowercase.
 
 ```
