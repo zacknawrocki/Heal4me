@@ -1,3 +1,3 @@
 {
-    "mongoURI": "TODO"
+    "mongoURI": "mongodb+srv://superuser:<password>@cluster0-cycgb.mongodb.net/test?retryWrites=true&w=majority"
 }
