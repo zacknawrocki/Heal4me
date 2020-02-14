@@ -20,7 +20,7 @@ Type of Commit | Files Related to Commit | Further Description <br>
 ##### Type of Commit
 Are you adding a file, removing a file, refactoring a file, better documenting a file, etc?
 ##### Files Related to Commit
-The files being commited. If everything below a directory was modified/created/removed, feel free to simple give the directory. The files must be listed in [Oxford Comma Format](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
+The files being commited. If everything below a directory was modified/created/removed, feel free to simply give the directory. The files must be listed in [Oxford Comma Format](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
 ##### Further Description
 Finally, describe in more detail what has been done to the file in question.
 **Together, these commit guidelines look like the following**
