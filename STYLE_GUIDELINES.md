@@ -17,11 +17,11 @@ Heal4Me uses tabs to organize and format all code. Our definition of a tab consi
 ### Git Commit Messages
 All commit messages through Git must follow the following format:
 **Type of Commit | Files Related to Commit | Further Description**
-Type of Commit - Are you adding a file, removing a file, refactoring a file, better documenting a file, etc?
-Files Related to Commit - The files that were changed. If everything below a directory was modified/created/removed, feel free to simple give the directory. The files must listed in [Oxford Comma Format](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/).
+Type of Commit - Are you adding a file, removing a file, refactoring a file, better documenting a file, etc? <br>
+Files Related to Commit - The files that were changed. If everything below a directory was modified/created/removed, feel free to simple give the directory. The files must listed in [Oxford Comma Format](https://www.grammarly.com/blog/what-is-the-oxford-comma-and-why-do-people-care-so-much-about-it/). <br>
 Further Description Finally, describe in more detail what has been done to the file in question.
 ```
-git commit -m "add | new_file.c | A new file was created for the purpose of..."
+git commit -m "add | a/new_file.c, a/new_file2.c, a/b/new_file3.c | Three new files were created for the purpose of..."
 ```
 
 ### Variable and Function Names
