@@ -4,8 +4,8 @@ Heal4Me style guidelines are the perfect marriage between legible usefulness and
 ### Brackets
 Heal4Me uses Stroustrup style, a variant of K&R, in which K&R extends to functions and classes, not just the blocks inside the function. All these brackets have their opening braces on the same line as their respective control statements; closing braces remain in a line of their own, unless followed by a keyword, such as else or while.
 ```
-function partyAtHq(num_Heal4Me_users) {
-   if (num_Heal4Me_users >= 1000000) {
+function party_at_hq(num_heal4me_users) {
+   if (num_heal4me_users >= 1000000) {
       console.log("Party at Heal4Me HQ!");
    }
 }
