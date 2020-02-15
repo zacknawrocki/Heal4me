@@ -37,7 +37,7 @@ simple_heal4me_function()
 ```
 
 ### File Names
-Files that must be easy to find when visiting a repository are entirely capitalized, in which multiple words are separated by underscores. These files apply to anything that a new user must immediately see once coming across this repository for the first time, such as the README, LICENSE, CODE_OF_CONDUCT, and of course, this file, STYLE_GUIDELINES. These files must be located in the home (highest) directory of the repository, unless you plan on including additional README files within subdirectories, in order to describe its contents. Another exception with README.md is the naming format, considering the separate words are not underscored.
+Files that must be easy to find when visiting a repository are entirely capitalized, in which multiple words are separated by underscores. These files apply to anything that a new user must immediately see once coming across this repository for the first time, such as the README, LICENSE, CODE_OF_CONDUCT, and of course, this file, STYLE_GUIDELINES. These files must be located in the home (highest) directory or /media of the repository, unless you plan on including additional README files within subdirectories, in order to describe its contents. Another exception with README.md is the naming format, considering the separate words are not underscored.
 
 Any other file follows a lowercase, snake case format. As explained (and also used in practice) in more depth under "Variable and Function Names," each word is separated by an underscore, all consisting of lowercase letters.
 
