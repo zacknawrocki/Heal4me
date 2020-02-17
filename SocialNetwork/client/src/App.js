@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
+import Forum from './components/layout/Forum';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
@@ -16,6 +17,7 @@ const App = () => (
         <Switch>
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/forum" component={Forum} />
         </Switch>
       </section>
     </Fragment> 

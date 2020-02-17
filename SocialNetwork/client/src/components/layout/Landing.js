@@ -14,6 +14,7 @@ export const Landing = () => {
             <div className="buttons">
               <Link to="/register" className="btn btn-primary">Sign Up</Link>
               <Link to="/login" className="btn btn-light">Login</Link>
+              <Link to="/forum" className="btn btn-light">Forum</Link>
             </div>
           </div>
         </div>
