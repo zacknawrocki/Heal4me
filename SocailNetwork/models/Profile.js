@@ -7,7 +7,16 @@ const ProfileSchema = new mongoose.Schema({
     company: {
         type: String
     },
+    location: {
+        type: String
+    },
     website: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    age: {
         type: String
     },
     occupation:{
