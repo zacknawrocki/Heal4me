@@ -10,6 +10,7 @@ const Education = ({ education, deleteEducation }) => {
     <tr key={edu._id}>
       <td>{edu.school}</td>
       <td className="hide-sm">{edu.degree}</td>
+      <td className="hide-sm">{edu.fieldofstudy}</td>
       <td>
         <Moment format="YYYY/MM/DD">{moment.utc(edu.from)}</Moment> -{' '}
         {edu.to === null ? (
@@ -37,6 +38,7 @@ const Education = ({ education, deleteEducation }) => {
           <tr>
             <th>School</th>
             <th className="hide-sm">Degree</th>
+            <th className="hide-sm">Field of Study</th>
             <th className="hide-sm">Years</th>
             <th />
           </tr>
