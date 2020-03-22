@@ -40,7 +40,7 @@ export const loadUser = () => async dispatch => {
     };
   
     const body = JSON.stringify({ name, email, password });
-    
+  
     try {
       const res = await axios.post('/api/users', body, config);
   
