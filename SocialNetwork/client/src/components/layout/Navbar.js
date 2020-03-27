@@ -12,6 +12,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
           Users
         </Link>
       </li>
+        <li>
+            <Link to='/contact'>
+                Contacts
+            </Link>
+        </li>
       <li>
         <Link to='/posts'>
           Posts
@@ -45,7 +50,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
     </ul>
   );
-
   return (
     <nav className='navbar bg-dark'>
       <h1>

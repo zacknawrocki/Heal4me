@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="507159d0-651b-40b5-95b0-cfb768ccf1a5" name="默认更改列表" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ZHyLGZA79EmLsYmHpabHmrYAQ9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../workProjects/qinghai-iti/qh-iop-iti" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\collection\client\src" />
+      <recent name="C:\Users\Administrator\Desktop\collection\client" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Administrator\Desktop\collection\client\src\api" />
+      <recent name="C:\Users\Administrator\Desktop\collection\client" />
+      <recent name="C:\Users\Administrator\Desktop\collection\client\config" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="507159d0-651b-40b5-95b0-cfb768ccf1a5" name="默认更改列表" comment="" />
+      <created>1584510256260</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584510256260</updated>
+      <workItem from="1584510257807" duration="992000" />
+      <workItem from="1584513949694" duration="405000" />
+      <workItem from="1584525775221" duration="660000" />
+      <workItem from="1584526722984" duration="13000" />
+      <workItem from="1584538687462" duration="21000" />
+      <workItem from="1584547075489" duration="1366000" />
+      <workItem from="1584591305015" duration="15000" />
+      <workItem from="1584593018058" duration="226000" />
+      <workItem from="1584593541344" duration="2900000" />
+      <workItem from="1584599337335" duration="48000" />
+      <workItem from="1584683545040" duration="7713000" />
+      <workItem from="1584714082236" duration="383000" />
+      <workItem from="1584722019447" duration="2673000" />
+      <workItem from="1584785761116" duration="10621000" />
+      <workItem from="1584804151041" duration="86000" />
+      <workItem from="1584865318234" duration="10155000" />
+      <workItem from="1584939701240" duration="238000" />
+      <workItem from="1584939953424" duration="17728000" />
+      <workItem from="1584960986014" duration="8000" />
+      <workItem from="1585026879783" duration="17777000" />
+      <workItem from="1585046820567" duration="4723000" />
+      <workItem from="1585059631949" duration="51000" />
+      <workItem from="1585111453875" duration="20512000" />
+      <workItem from="1585196101076" duration="2104000" />
+      <workItem from="1585198444929" duration="11244000" />
+      <workItem from="1585212465061" duration="101000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="796" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585126682011">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="796" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1585126682011" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1585201230756">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585201230756" />
+    <state x="644" y="253" width="632" height="534" key="find.popup" timestamp="1585212386859">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="644" y="253" width="632" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585212386859" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1584960342083">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1584960342083" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585197000424">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585197000424" />
+  </component>
+</project>
