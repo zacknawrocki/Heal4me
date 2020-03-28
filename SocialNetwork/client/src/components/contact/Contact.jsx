@@ -449,8 +449,8 @@ export default class Contact extends Component{
                                         key="2"
                                     >
                             <div className="searchBar">
-                                <Input placeholder="Please enter the group name" style={{width: '200px', marginRight: '10px'}} value={this.state.inputValue} onChange={this.inputChange}/>
-                                <Button icon={<SearchOutlined />} type="primary" onClick={this.searchGroup}>Search</Button>
+                                <Input placeholder="Search" style={{width: '200px', marginRight: '10px'}} value={this.state.inputValue} onChange={this.inputChange}/>
+                                <Button icon={<SearchOutlined />} type="primary" onClick={this.searchGroup}></Button>
                                 <Button icon={<PlusCircleOutlined />} onClick={this.addGroup}>Create Group</Button>
                             </div>
                             <Spin spinning={spinning} tip={'Group list loading...'}>
