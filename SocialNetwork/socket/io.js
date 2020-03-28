@@ -157,7 +157,7 @@ IO.sockets.on('connection',function (socket){
                     IO.to(result.socket_id).emit('addFriendsMessage', { code: 0, message: 'A friend request received!', messageBody: null });
                 }
             }
-            socket.emit('addFriends', { code: 0, message: 'Friend request has been sent, waiting for response', messageBody: null });
+            socket.emit('addFriends', { code: 0, message: 'Friend request has been sent！', messageBody: null });
         }catch (e) {
             socket.emit('addFriends', { code: 5, message: 'Failure to add friend', messageBody: null });
             throw e;
@@ -169,7 +169,7 @@ IO.sockets.on('connection',function (socket){
             const result = await user.findOne({
                 _id: data.friend_id
             });
-            data.content = result.name + ' has accepted your friend request, you are friends now!';
+            data.content = result.name + ' has accepted your friend request!';
             await notification.updateOne({
                 _id: data._id
             }, data);
@@ -196,7 +196,7 @@ IO.sockets.on('connection',function (socket){
             const result = await user.findOne({
                 _id: data.friend_id
             });
-            data.content = result.name + ' declined your friend request';
+            data.content = result.name + ' has declined your friend request';
             await notification.updateOne({
                 _id: data._id
             }, data);

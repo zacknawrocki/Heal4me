@@ -348,6 +348,10 @@ button {
   text-align: center;
 }
 
+.landing-inner h1 {
+  color: var(--light-color);
+}
+
 /* Profiles Page */
 .profile {
   display: grid;
