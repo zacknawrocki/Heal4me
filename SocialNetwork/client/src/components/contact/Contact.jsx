@@ -6,7 +6,7 @@ import {
     reqNotification, reqUserList, reqGroupList,
     reqAddGroup, reqDeleteGroup
 } from "../../api/contact";
-import Socket from "../../untils/socket";
+import Socket from "../../utils/socket";
 import ContactMain from "./ContactMain";
 import AddModal from "./AddModal";
 import RoomModal from "./RoomModal";
@@ -95,7 +95,7 @@ export default class Contact extends Component{
     deleteFriends = (item) => {
         Modal.confirm({
             title: 'Remove Friend',
-            content: 'Are you sure?',
+            content: 'Are you sure to remove this friend?',
             okText: 'Confirm',
             cancelText: 'Cancel',
             onOk: () => {
@@ -342,7 +342,7 @@ export default class Contact extends Component{
     deleteGroup = _id => {
         Modal.confirm({
             title: 'Delete Group',
-            content: 'Are you sure?',
+            content: 'Are you sure to delete this group?',
             okText: 'Confirm',
             cancelText: 'Cancel',
             onOk: () => {
@@ -506,8 +506,8 @@ export default class Contact extends Component{
                                                     avatar={
                                                         <MessageOutlined />
                                                     }
-                                                    title={<span style={{fontSize: '18px'}}>{item.type === 1? 'Type: Friend Request' : 'Type: Message'}</span>}
-                                                    description={<span>{item.isAllowed === 1? 'Content: You are friends now!' : 'The request has been declined'}</span>}
+                                                    title={<span style={{fontSize: '18px'}}>{item.type === 1? 'Friend Request' : 'Instant Message'}</span>}
+                                                    description={<span>{item.isAllowed === 1? 'Content: you are friends now!' : 'The request has been declined'}</span>}
                                                 />
                                                 <div>Time:{moment(item.date).format('YYYY-MM-DD hh:ss')}</div>
                                             </Skeleton>
@@ -515,14 +515,14 @@ export default class Contact extends Component{
                                     } else {
                                         return ( <List.Item
                                             actions={item.friend_id === store.getState().auth.user._id && item.isAllowed === 0 ?
-                                                [<a key="list-loadmore-edit" onClick={this.agreeAdd.bind(this, item)}>Accept</a>, <a key="list-loadmore-more" onClick={this.rejectAdd.bind(this, item)}>Decline</a>] : [<a key="list-loadmore-more" onClick={this.confirmAdd.bind(this, item)}>Confirm</a>]}
+                                                [<a key="list-loadmore-edit" onClick={this.agreeAdd.bind(this, item)}>Accept</a>, <a key="list-loadmore-more" onClick={this.rejectAdd.bind(this, item)}>Decline</a>] : [<a key="list-loadmore-more" onClick={this.confirmAdd.bind(this, item)}>Remove</a>]}
                                         >
                                             <Skeleton avatar title={false} loading={item.loading} active>
                                                 <List.Item.Meta
                                                     avatar={
                                                         <MessageOutlined />
                                                     }
-                                                    title={<span style={{fontSize: '18px'}}>{item.type === 1? 'Type: Friend Request' : 'Type: Message'}</span>}
+                                                    title={<span style={{fontSize: '18px'}}>{item.type === 1? 'Friend Request' : 'Instant Message'}</span>}
                                                     description={<span>Content: {item.content}</span>}
                                                 />
                                                 <div>Time:{moment(item.date).format('YYYY-MM-DD hh:ss')}</div>
