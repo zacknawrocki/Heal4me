@@ -15,6 +15,7 @@ import Post from '../post/Post';
 import NotFound from '../layout/NotFound';
 import Posts from '../posts/Posts';
 import Contact from "../contact/Contact";
+import Home from "../home/Home"
 
 export const Routes = () => {
     return (
@@ -25,6 +26,7 @@ export const Routes = () => {
                 <Route exact path="/login" component={Login} />
                 <PrivateRoute exact path="/posts" component={Posts} />
                 <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                <PrivateRoute exact path='/home' component={Home} />
                 <PrivateRoute exact path='/contact' component={Contact} />
                 <PrivateRoute exact path='/create-profile' component={CreateProfile} />
                 <PrivateRoute exact path='/edit-profile' component={EditProfile} />
