@@ -75,14 +75,14 @@ router.get('/group', async (req, res) => {
         const result = await room.find();
         const finalResult = [];
         for( const item of result ){
-         const userInfo = item.roomMember.filter( item => item._id === req.query.user_id);
+         const userInfo = item.roomMember.filter( item => item._id === req.query.user_id)[0];
          if (userInfo){
              finalResult.push(item);
          } else {
              item.roomLeader === req.query.user_id? finalResult.push(item) : ''
          }
         }
-        res.send({ code: 0, message: 'Group list loaded!', messageBody: result});
+        res.send({ code: 0, message: 'Group list loaded!', messageBody: finalResult});
     }catch (e) {
         res.send({ code: 5, message: 'Failure to load the group list!', messageBody: null});
     }
