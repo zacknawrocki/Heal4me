@@ -67,6 +67,16 @@ router.get('/:id', auth, async(req, res) => {
         if(!post) {
             return res.status(404).json({ msg: 'Post not found'});
         }
+
+        const user = await User.findById(req.user.id);
+        user.recently_viewed.unshift({ post: post.id });
+
+        if (user.recently_viewed.length > 10) {
+            user.recently_viewed.pop();
+        }
+
+        await user.save();
+
         res.json(post);
          
     } catch (err) {

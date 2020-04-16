@@ -14,7 +14,9 @@ router.get('/', auth, async(req, res) => {
     try {
         let cutoff = new Date();
         cutoff.setDate(cutoff.getDate()-7);
+        
         const posts = await Post.find({date: {$gt: cutoff}});
+
         res.json(posts);
     } catch (err) {
         console.error(err.message);
