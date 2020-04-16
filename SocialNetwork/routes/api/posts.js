@@ -7,6 +7,12 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 
+function findPropertyInArrayOfObjects(arr, propName, value) {
+    let i = 0;
+    while (i < arr.length && arr[i][propName] != value) ++i;
+    return i < arr.length ? i : -1;
+}
+
 // @route  POST api/posts
 // @desc   Create a post
 // @access Private
@@ -69,13 +75,27 @@ router.get('/:id', auth, async(req, res) => {
         }
 
         const user = await User.findById(req.user.id);
-        user.recently_viewed.unshift({ post: post.id });
+
+        // delete data
+        // user.recently_viewed = []
+        // await user.save();
+
+        let postPos = findPropertyInArrayOfObjects(user.recently_viewed, "post", post.id);
+        console.log(postPos);
+        
+        if (postPos >= 0) {  
+            user.recently_viewed.splice(postPos, 1);
+            user.recently_viewed.unshift({ post: post.id });
+        } else {
+            user.recently_viewed.unshift({ post: post.id });
+        }
 
         if (user.recently_viewed.length > 10) {
             user.recently_viewed.pop();
         }
-
+        
         await user.save();
+        console.log(user);
 
         res.json(post);
          
