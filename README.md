@@ -1,17 +1,15 @@
-Feel free to begin working on the README
-
-
 # Heal4me
 
 ## What is Heal4me
-Heal4Me is focused on providing its users with the resources to combat mental illness and provide anonymous, meaningful support during their time of need. 
+Heal4Me is an online platform focused on providing its users with the resources to combat mental illness and provide anonymous, meaningful support during their times of need. 
 
 We are aiming to create an social networking platform that provides an anonymous environment that the users feel more comfortable, convenient, accessable, and/or more affordable (free) than perhaps in-person group meetings, or meetings with a therapist. By using our algorithm to receive support when users may not be available to respond, Heal4Me can truly be used 24 hours a day, 7 days a week.
 
-This project intends to deliver a feed of recommendations ranging from books, meditation tutorials, to local resources. Additionally, Heal4Me’s defining feature is a crowdsourced support forum, that aims to be a virtual 24/7 Alcoholics Anonymous, for individuals struggling with mental illnesses and other personal challenges.
+This project intends to deliver a feed of recommendations ranging from books, meditation tutorials, to local resources. Additionally, Heal4Me’s defining feature is a crowdsourced support forum, that aims to be similar to a virtual 24/7 Alcoholics Anonymous, for individuals struggling with mental illnesses and other personal challenges.
 
 
 ## Features
+
 ### Core Features
 - An online representation of users’ profiles
     - Allow users to customize their profiles(name, birth date, username and bio.etc)
@@ -45,20 +43,9 @@ This project intends to deliver a feed of recommendations ranging from books, me
     - Allow administrators to manage users
 
 
+## Important Links
+To become a contributor, as well as learn about style guidelines, our code of conduct, recommended learning resources, and more about Heal4Me, visit our [contributing page](https://github.com/zacknawrocki/Heal4me/blob/master/media/CONTRIBUTING.md).
 
 
-[Link 1]()
-
-[Link 2]()
-
-**Link 3**
-
-
-## Setup
-
-
-## Contributing
-
-
-
-etc, etc, etc
+## Contact
+Need to reach out to us? Feel free to send the team an email at heal4meproject@gmail.com
