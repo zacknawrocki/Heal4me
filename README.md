@@ -1,11 +1,11 @@
 # Heal4me
 
 ## What is Heal4me
-Heal4Me is focused on providing its users with the resources to combat mental illness and provide anonymous, meaningful support during their time of need. 
+Heal4Me is an online platform focused on providing its users with the resources to combat mental illness and provide anonymous, meaningful support during their times of need. 
 
 We are aiming to create an social networking platform that provides an anonymous environment that the users feel more comfortable, convenient, accessable, and/or more affordable (free) than perhaps in-person group meetings, or meetings with a therapist. By using our algorithm to receive support when users may not be available to respond, Heal4Me can truly be used 24 hours a day, 7 days a week.
 
-This project intends to deliver a feed of recommendations ranging from books, meditation tutorials, to local resources. Additionally, Heal4Me’s defining feature is a crowdsourced support forum, that aims to be a virtual 24/7 Alcoholics Anonymous, for individuals struggling with mental illnesses and other personal challenges.
+This project intends to deliver a feed of recommendations ranging from books, meditation tutorials, to local resources. Additionally, Heal4Me’s defining feature is a crowdsourced support forum, that aims to be similar to a virtual 24/7 Alcoholics Anonymous, for individuals struggling with mental illnesses and other personal challenges.
 
 
 ## Features
