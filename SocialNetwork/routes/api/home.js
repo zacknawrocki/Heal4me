@@ -78,9 +78,22 @@ router.get('/', auth, async(req, res) => {
             console.log(`error:\n${data}\n`);
         });
         subprocess.stderr.on('close', () => {
-            res.json(result);
+            const mongoose = require("mongoose");
+ 
+            post_ids = JSON.parse(result);
+            
+            // Convert strings to ObjectIds
+            for (let i = 0; i < post_ids.length; ++i) {
+                post_ids[i] = mongoose.Types.ObjectId(post_ids[i]._id);
+            }
+            
+            // Get the documents and send them
+            post_docs = Post.find({'_id': { $in: post_ids }}, 
+            function(err, docs) {
+                res.json(docs);
+            });
         });
-        
+
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

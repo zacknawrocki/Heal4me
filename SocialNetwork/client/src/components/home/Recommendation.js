@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getRecommendation } from '../../actions/home';
+import PostItem from '../posts/PostItem';
 
 const Recommendation = ({ getRecommendation, recommendation: { recommendation, loading } }) => {
 	useEffect(() => {
@@ -13,9 +14,11 @@ const Recommendation = ({ getRecommendation, recommendation: { recommendation, l
         <Spinner></Spinner>
     ) : (
         <Fragment>
-          	<div className='recommendation'>
-				{recommendation}
-        	</div>
+          	<div className='recommendation'> 
+			  	{recommendation.map(post => (
+					<PostItem key={post._id} post={post} />
+				))}
+			</div>
         </Fragment>
     );
 };

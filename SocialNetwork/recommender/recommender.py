@@ -71,7 +71,7 @@ if __name__ == "__main__":
     sorted_similar_posts_ids = []
 
     for post in sorted_similar_posts:
-        if post[0] != pr_data_len - 1:
+        # print(get_text_from_index(post[0]))
+        if post[0] != pr_data_len - 1 and post[1] != 0:
             sorted_similar_posts_ids.append({"_id": get_id_from_index(post[0])})
-
     print(json.dumps(sorted_similar_posts_ids))
