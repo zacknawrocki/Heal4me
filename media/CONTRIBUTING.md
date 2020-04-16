@@ -40,7 +40,7 @@ We want to help people struggling with mental illnesses. According to the world 
 ## Contact and Communication 
 We use Slack as a means of communication for developers, as well as Trello for SCRUM development. If interested, please email us to join our workspaces.
 
-**Important Links for Contributing**
+**Important Links for Contributing** <br/>
 [GitHub Repository](https://github.com/zacknawrocki/Heal4me) <br/>
 [Code of Coduct](https://github.com/zacknawrocki/Heal4me/blob/master/media/CODE_OF_CONDUCT.md) <br/>
 [Licensing](https://github.com/zacknawrocki/Heal4me/blob/master/LICENSE) <br/>
