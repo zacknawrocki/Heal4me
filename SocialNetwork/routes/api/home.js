@@ -70,17 +70,17 @@ router.get('/', auth, async(req, res) => {
                 JSON.stringify(rv_trimmed),
                 JSON.stringify(posts_not_in_rv)]);
 
+        let result = "";
         subprocess.stdout.on('data', (data) => {
-            console.log(`data:\n${data}\n`);
+            result += data.toString();
         });
         subprocess.stderr.on('data', (data) => {
             console.log(`error:\n${data}\n`);
         });
         subprocess.stderr.on('close', () => {
-            console.log('Closed');
+            res.json(result);
         });
-
-        res.json(posts);
+        
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
