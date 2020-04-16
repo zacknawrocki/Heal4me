@@ -7,6 +7,7 @@ export const Landing = ({isAuthenticated}) => {
     if (isAuthenticated) {
       return <Redirect to='/home' />;
     }
+
     return (
       <section className="landing">
         <div className="dark-overlay">
