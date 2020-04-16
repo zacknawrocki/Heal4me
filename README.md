@@ -1,6 +1,6 @@
-# Heal4me
+# What is Heal4Me?
 
-## What is Heal4me
+## The Run-Down
 Heal4Me is an online platform focused on providing its users with the resources to combat mental illness and provide meaningful support during their times of need. 
 
 We aim to create an semi-anonymous social networking platform that's more comfortable, convenient, accessible, and/or affordable (free) than in-person group meetings or therapy. Heal4Me is online 24/7 to lend support to those in need.
