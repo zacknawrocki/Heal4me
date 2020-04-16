@@ -1,6 +1,3 @@
-Feel free to begin working on the README
-
-
 # Heal4me
 
 ## What is Heal4me
@@ -12,6 +9,7 @@ This project intends to deliver a feed of recommendations ranging from books, me
 
 
 ## Features
+
 ### Core Features
 - An online representation of users’ profiles
     - Allow users to customize their profiles(name, birth date, username and bio.etc)
@@ -45,20 +43,9 @@ This project intends to deliver a feed of recommendations ranging from books, me
     - Allow administrators to manage users
 
 
+## Important Links
+To become a contributor, as well as learn about style guidelines, our code of conduct, recommended learning resources, and more about Heal4Me, visit our [contributing page](https://github.com/zacknawrocki/Heal4me/blob/master/media/CONTRIBUTING.md).
 
 
-[Link 1]()
-
-[Link 2]()
-
-**Link 3**
-
-
-## Setup
-
-
-## Contributing
-
-
-
-etc, etc, etc
+## Contact
+Need to reach out to us? Feel free to send the team an email at heal4meproject@gmail.com
