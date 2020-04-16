@@ -50,30 +50,31 @@ router.get('/', auth, async(req, res) => {
         cutoff.setDate(cutoff.getDate()-7);
 
         // Filter by date and don't include posts published by the current user
-        // Additionall, only select the 'text' column
+        // Additionally, only select the 'text' column
         const posts = await Post.find({date: {$gt: cutoff}, 
             user: {$ne: user.id}}, 'text');
 
         // Only consider recommending posts not recently viewed
         posts_not_in_rv = posts.filter(post => !objectIdExistsInArray(rv_trimmed, post._id));
-
+            
         // For testing purposes
-        console.log('Recently viewed posts: ' + '\n' +  JSON.stringify(rv_trimmed) + '\n');
-        console.log('All posts (within 7 days): ' + '\n' + JSON.stringify(posts) + '\n');
-        console.log('All posts (within 7 days + not recently viewed)' + '\n' + JSON.stringify(posts_not_in_rv)+ '\n');
+        // console.log('Recently viewed posts: ' + '\n' +  JSON.stringify(rv_trimmed) + '\n');
+        // console.log('All posts (within 7 days): ' + '\n' + JSON.stringify(posts) + '\n');
+        // console.log('All posts (within 7 days + not recently viewed)' + '\n' + JSON.stringify(posts_not_in_rv)+ '\n');
 
         // Communicate with recommender script
         const path = require('path');
         const {spawn} = require('child_process');
         const subprocess = spawn('python', 
             [path.join(__dirname, '../../recommender/recommender.py'),
-                posts, rv]);
+                JSON.stringify(rv_trimmed),
+                JSON.stringify(posts_not_in_rv)]);
 
         subprocess.stdout.on('data', (data) => {
-            console.log(`data:${data}`);
+            console.log(`data:\n${data}\n`);
         });
         subprocess.stderr.on('data', (data) => {
-            console.log(`error:${data}`);
+            console.log(`error:\n${data}\n`);
         });
         subprocess.stderr.on('close', () => {
             console.log('Closed');
