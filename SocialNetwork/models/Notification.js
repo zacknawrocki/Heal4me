@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const NotificationSchema = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
     },
     friend_id: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
     },
     content: String,
     type: {

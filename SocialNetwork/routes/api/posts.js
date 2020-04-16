@@ -80,9 +80,7 @@ router.get('/:id', auth, async(req, res) => {
         // delete data
         // user.recently_viewed = []
         // await user.save();
-
         let postPos = findPropertyInArrayOfObjects(user.recently_viewed, "post", post.id);
-        console.log(postPos);
         
         if (postPos >= 0) {  
             user.recently_viewed.splice(postPos, 1);

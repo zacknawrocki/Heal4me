@@ -5,7 +5,7 @@ const RoomSchema = new Schema({
     roomId:  Schema.Types.ObjectId,
     roomLeader: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
     },
     roomName: String,
     roomMember: Array,

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const SocketSchema = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
-        ref: 'users'
+        ref: 'user'
     },
     socket_id: String,
     date: {
