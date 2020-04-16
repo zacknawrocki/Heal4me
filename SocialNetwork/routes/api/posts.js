@@ -14,7 +14,7 @@ function findPropertyInArrayOfObjects(arr, propName, value) {
     return i < arr.length ? i : -1;
 }
 
-// @route Get api/posts/my
+// @ route Get api/posts/my
 // @ get my posts
 
 router.get('/my', [auth, [
