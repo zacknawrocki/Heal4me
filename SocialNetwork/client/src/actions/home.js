@@ -8,7 +8,6 @@ import {
 export const getRecommendation = () => async dispatch => {
     try {
         const res = await axios.get('/api/home');
-
         dispatch({
             type: GET_RECOMMENDATION,
             payload: res.data

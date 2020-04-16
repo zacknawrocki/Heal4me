@@ -11,13 +11,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
     const { type, payload } = action;
-  
     switch (type) {
         case GET_RECOMMENDATION:
             return {
-            ...state,
-            recommendation: payload,
-            loading: false
+                ...state,
+                recommendation: payload,
+                loading: false
             };
         case RECOMMENDATION_ERROR:
             return {

@@ -5,7 +5,7 @@ import Spinner from '../layout/Spinner';
 import { getRecommendation } from '../../actions/home';
 
 const Recommendation = ({ getRecommendation, recommendation: { recommendation, loading } }) => {
-    useEffect(() => {
+	useEffect(() => {
       getRecommendation();
     }, [getRecommendation]);
 
@@ -23,12 +23,11 @@ const Recommendation = ({ getRecommendation, recommendation: { recommendation, l
 };
 
 Recommendation.propTypes = {
-	getRecommendation: PropTypes.func.isRequired,
-	recommendation: PropTypes.func.isRequired,
+	getRecommendation: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-	recommendation: state.recommendation
+	recommendation: state.home
 });
 
 export default connect(mapStateToProps, { getRecommendation })(Recommendation);
