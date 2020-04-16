@@ -27,21 +27,18 @@ router.get('/', auth, async(req, res) => {
         let cutoff = new Date();
         cutoff.setDate(cutoff.getDate()-7);
         
-        // todo: filter by posts not created by user
-        // -password
         const user = await User.findById(req.user.id)
             .select('-password')
             .populate('recently_viewed.post');
-        const posts = await Post.find({date: {$gt: cutoff}, user: {$ne: user.id}})
-            .populate('likes.user');
+        const posts = await Post.find({date: {$gt: cutoff}, user: {$ne: user.id}});
         
         let rv = user.recently_viewed;
         removeNullPropObjectsFromArray(rv, "post");
-        for (let i=0; i < rv.length; ++i) {
-            if (rv[i].post !== null) {
-                console.log(rv[i].post.text);
-            }
-        }
+        // for (let i=0; i < rv.length; ++i) {
+        //     if (rv[i].post !== null) {
+        //         console.log(rv[i].post.text);
+        //     }
+        // }
 
         res.json(posts);
     } catch (err) {
