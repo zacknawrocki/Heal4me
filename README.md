@@ -14,7 +14,7 @@ While Heal4Me is predominantly a crowd-sourced mental health support forum, akin
 - Notifications
  
 ## Important Links
-- Contribute to the Heal4Me community on our [contributing page](https://github.com/zacknawrocki/Heal4me/blob/master/media/CONTRIBUTING.md)!
+- Contribute to the Heal4Me community: visit our [contributing page](https://github.com/zacknawrocki/Heal4me/blob/master/media/CONTRIBUTING.md)!
 - Learn about our [style guidelines](https://github.com/zacknawrocki/Heal4me/blob/master/media/STYLE_GUIDELINES.md).
 - See our [code of conduct](https://github.com/zacknawrocki/Heal4me/blob/master/media/CODE_OF_CONDUCT.md).
 - Check out some recommended learning resources on [Youtube](https://www.youtube.com/playlist?list=PLPgx4r0FGixm5SZqE6KEPt9n8oLqFi57h) and [Udemy](https://www.udemy.com/course/mern-stack-front-to-back/).
