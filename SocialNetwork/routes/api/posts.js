@@ -14,6 +14,18 @@ function findPropertyInArrayOfObjects(arr, propName, value) {
     return i < arr.length ? i : -1;
 }
 
+// @route Get api/posts/my
+// @ get my posts
+
+router.get('/my', [auth, [
+    check('text', 'Text is required').not().isEmpty()
+]],
+async(req, res) => {
+    const data = await Post.find({user: req.user.id})
+    res.json(data)
+}
+)
+
 // @route  POST api/posts
 // @desc   Create a post
 // @access Private
