@@ -14,8 +14,10 @@ const Recommendation = ({ getRecommendation, recommendation: { recommendation, l
     ) : (
         <Fragment>
           	<div className='recommendation'>
-				{recommendation.map(post => (
-					post._id
+				{recommendation.map(p => (
+					<div class='x'>
+						{p.text}
+					</div>
 				))}
         	</div>
         </Fragment>

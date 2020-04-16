@@ -12,7 +12,9 @@ const Profile = require('../../models/Profile');
 // @access Public
 router.get('/', auth, async(req, res) => {
     try {
-        const posts = await Post.find().sort({ date: -1 });
+        let cutoff = new Date();
+        cutoff.setDate(cutoff.getDate()-7);
+        const posts = await Post.find({date: {$gt: cutoff}});
         res.json(posts);
     } catch (err) {
         console.error(err.message);
