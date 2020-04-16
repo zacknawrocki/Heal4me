@@ -26,6 +26,7 @@ def create_dataframe(src, type):
         return pd.read_csv(src)
     return None
 
+# concatenate recently viewed content
 def combine_recently_viewed(rv_data):
     combined_str = ""
     for i in range(len(rv_data)):
@@ -34,6 +35,7 @@ def combine_recently_viewed(rv_data):
             combined_str += " "
     return combined_str
 
+# attach an index to each "object"
 def apply_indices(list_of_dicts):
     i = 0
     for di in list_of_dicts:
@@ -43,7 +45,7 @@ def apply_indices(list_of_dicts):
 if __name__ == "__main__":
     recently_viewed = sys.argv[1]
     possible_recommendations = sys.argv[2]
-
+    
     # Convert JSON strings to lists of dicts
     rv_data = json.loads(recently_viewed)
     pr_data = json.loads(possible_recommendations)

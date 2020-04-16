@@ -18,6 +18,7 @@ function removeNullPropObjectsFromArray(arr, propName) {
         ++i;
     }
 }
+
 // @desc   Helper function for determining if an object exists in an array
 function objectIdExistsInArray(arr, id) {
     let i = 0;
