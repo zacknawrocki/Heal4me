@@ -8,8 +8,26 @@ import {
   ADD_POST,
   GET_POST,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  GET_MY_POSTS
 } from './types';
+
+// Get posts of a user
+export const getMyPosts = () => async dispatch => {
+    try{
+        const res = await axios.get('/api/posts/my', {
+            headers: {
+                Authorization: localStorage.token
+            }
+        })
+        dispatch({
+            type: GET_MY_POSTS,
+            payload: res.data
+        })
+    } catch(err) {
+
+    }
+}
 
 // Get posts
 export const getPosts = () => async dispatch => {
