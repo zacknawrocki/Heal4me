@@ -18,33 +18,56 @@ function removeNullPropObjectsFromArray(arr, propName) {
         ++i;
     }
 }
+// @desc   Helper function for determining if an object exists in an array
+function objectIdExistsInArray(arr, id) {
+    let i = 0;
+    while (i < arr.length && arr[i]["_id"] != id) ++i;
+    return i < arr.length;
+}
 
 // @route  GET api/recommendation
 // @desc   Get similar posts for recommendations
 // @access Public
 router.get('/', auth, async(req, res) => {
     try {
-        let cutoff = new Date();
-        cutoff.setDate(cutoff.getDate()-7);
-        
+        // Retrieve 10 most recently viewed posts
         const user = await User.findById(req.user.id)
             .select('-password')
             .populate('recently_viewed.post');
-        const posts = await Post.find({date: {$gt: cutoff}, 
-            user: {$ne: user.id}}, 'text');
         
         let rv = user.recently_viewed;
         removeNullPropObjectsFromArray(rv, 'post');
-        // for (let i=0; i < rv.length; ++i) {
-        //     if (rv[i].post !== null) {
-        //         console.log(rv[i].post.text);
-        //     }
-        // }
+        
+        const rv_trimmed = rv.map(item => {
+            return {
+                _id: item.post.id,
+                text: item.post.text
+            }
+        });
+        
+        // Retrieve all posts published within the last 7 days
+        let cutoff = new Date();
+        cutoff.setDate(cutoff.getDate()-7);
+
+        // Filter by date and don't include posts published by the current user
+        // Additionall, only select the "text" column
+        const posts = await Post.find({date: {$gt: cutoff}, 
+            user: {$ne: user.id}}, 'text');
+
+        // Only consider recommending posts not recently viewed
+        posts_not_in_rv = posts.filter(post => !objectIdExistsInArray(rv_trimmed, post._id));
+
+        // For testing purposes
+        console.log("Recently viewed posts: " + "\n" +  JSON.stringify(rv_trimmed) + "\n");
+        console.log("All posts (within 7 days): " + "\n" + JSON.stringify(posts) + "\n");
+        console.log("All posts (within 7 days + not recently viewed)" + "\n" + JSON.stringify(posts_not_in_rv)+ "\n");
 
         // Communicate with recommender script
-        const path = require("path");
-        const {spawn} = require("child_process");
-        const subprocess = spawn("python", [path.join(__dirname, "../../recommender/recommender.py")]);
+        const path = require('path');
+        const {spawn} = require('child_process');
+        const subprocess = spawn('python', 
+            [path.join(__dirname, '../../recommender/recommender.py'),
+                posts, rv]);
 
         subprocess.stdout.on('data', (data) => {
             console.log(`data:${data}`);
@@ -53,7 +76,7 @@ router.get('/', auth, async(req, res) => {
             console.log(`error:${data}`);
         });
         subprocess.stderr.on('close', () => {
-            console.log("Closed");
+            console.log('Closed');
         });
 
         res.json(posts);
