@@ -6,20 +6,29 @@ import {
     ADD_POST,
     GET_POST,
     ADD_COMMENT,
-    REMOVE_COMMENT
+    REMOVE_COMMENT,
+    GET_MY_POSTS
   } from '../actions/types';
   
   const initialState = {
     posts: [],
     post: null,
     loading: true,
-    error: {}
+    error: {},
+    myposts: [1,2,3,43]
   };
   
   export default function(state = initialState, action) {
     const { type, payload } = action;
   
     switch (type) {
+      case GET_MY_POSTS:
+        console.log('setting', payload)
+        return {
+          ...state,
+          loading: false,
+          myposts: payload
+        }
       case GET_POSTS:
         return {
           ...state,
