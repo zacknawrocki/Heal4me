@@ -21,7 +21,7 @@ function removeNullPropObjectsFromArray(arr, propName) {
 // @desc   Helper function for determining if an object exists in an array
 function objectIdExistsInArray(arr, id) {
     let i = 0;
-    while (i < arr.length && arr[i]["_id"] != id) ++i;
+    while (i < arr.length && arr[i]['_id'] != id) ++i;
     return i < arr.length;
 }
 
@@ -50,7 +50,7 @@ router.get('/', auth, async(req, res) => {
         cutoff.setDate(cutoff.getDate()-7);
 
         // Filter by date and don't include posts published by the current user
-        // Additionall, only select the "text" column
+        // Additionall, only select the 'text' column
         const posts = await Post.find({date: {$gt: cutoff}, 
             user: {$ne: user.id}}, 'text');
 
@@ -58,9 +58,9 @@ router.get('/', auth, async(req, res) => {
         posts_not_in_rv = posts.filter(post => !objectIdExistsInArray(rv_trimmed, post._id));
 
         // For testing purposes
-        console.log("Recently viewed posts: " + "\n" +  JSON.stringify(rv_trimmed) + "\n");
-        console.log("All posts (within 7 days): " + "\n" + JSON.stringify(posts) + "\n");
-        console.log("All posts (within 7 days + not recently viewed)" + "\n" + JSON.stringify(posts_not_in_rv)+ "\n");
+        console.log('Recently viewed posts: ' + '\n' +  JSON.stringify(rv_trimmed) + '\n');
+        console.log('All posts (within 7 days): ' + '\n' + JSON.stringify(posts) + '\n');
+        console.log('All posts (within 7 days + not recently viewed)' + '\n' + JSON.stringify(posts_not_in_rv)+ '\n');
 
         // Communicate with recommender script
         const path = require('path');
