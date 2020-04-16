@@ -16,9 +16,8 @@ router.get('/', auth, async(req, res) => {
         cutoff.setDate(cutoff.getDate()-7);
         
         // todo: filter by posts not created by user
-        const posts = await Post.find({date: {$gt: cutoff}});
-        const user = await User.findById(req.user.id);
-        
+        const user = await User.findById(req.user.id).populate('recently_viewed');
+        const posts = await Post.find({date: {$gt: cutoff}, user: {$ne: user.id}});
         console.log(user);
 
         res.json(posts);

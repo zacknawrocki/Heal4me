@@ -7,6 +7,7 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 
+// @desc   Helper function for finding an object with a property containing the given value
 function findPropertyInArrayOfObjects(arr, propName, value) {
     let i = 0;
     while (i < arr.length && arr[i][propName] != value) ++i;
@@ -95,7 +96,6 @@ router.get('/:id', auth, async(req, res) => {
         }
         
         await user.save();
-        console.log(user);
 
         res.json(post);
          
