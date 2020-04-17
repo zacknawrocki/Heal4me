@@ -10,17 +10,18 @@ const PostItem = ({
     removeLike,
     deletePost,
     auth,
+    isHome,
     post: { _id, text, name, avatar, user, likes, comments, date },
     showActions
 }) => (
-  <div className='post bg-white p-1 my-1'>
+  <div className={[`post bg-white p-1 my-1 ${isHome ? 'home-item' : ''}` ]}>
     <div>
       <Link to={`/profile/${user}`}>
         <img className='round-img' src={avatar} alt='' />
-        <h4>{name}</h4>
+        <h4 className={isHome ? 'hide' : '' }>{name}</h4>
       </Link>
     </div>
-    <div>
+    <div className="comment-box">
       <p className='my-1'>{text}</p>
       <p className='post-date'>
         Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
