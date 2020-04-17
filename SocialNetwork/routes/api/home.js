@@ -64,16 +64,25 @@ router.get('/', auth, async(req, res) => {
             }
         });
         
-        // Retrieve cached list of recently viewed posts and parse into JSON
-        const rv_cached = JSON.parse(localStorage.getItem("rv_cached"));
-        
-        // Check if the recommender script should be run, based on whether the list of 
-        // recently viewed posts has changed since the dashboard was last accessed
-        const ids_match = check_if_ids_match(rv_trimmed, rv_cached);
+        // Check it's safe to access the cache
+        const cache_exists = localStorage.getItem("rv_cached") != null;
+
+        // Declare cached list of recently viewed posts, ids_match boolean variable
+        let rv_cached = null;
+        let ids_match = null;
+
+        if (cache_exists) {
+            // Retrieve cached list of recently viewed posts and parse into JSON
+            rv_cached = JSON.parse(localStorage.getItem("rv_cached"));
+
+            // Check if the recommender script should be run, based on whether the list of
+            // recently viewed posts has changed since the dashboard was last accessed
+            ids_match = check_if_ids_match(rv_trimmed, rv_cached);
+        }
 
         // If the list of recently viewed posts is unchanged, send the cached list
         // of recommended posts that was calculated in a previous dashboard visit
-        if (rv_cached !== null && ids_match) {
+        if (cache_exists && ids_match) {
             res.json(JSON.parse(localStorage.getItem("rec_cached")));
             return 0;
         }
@@ -84,7 +93,7 @@ router.get('/', auth, async(req, res) => {
 
         // Filter by date and don't include posts published by the current user
         // Additionally, only select the 'text' column
-        const posts = await Post.find({date: {$gt: cutoff}, 
+        const posts = await Post.find({date: {$gt: cutoff},
             user: {$ne: user.id}}, 'text');
 
         // Only consider recommending posts not recently viewed
@@ -98,7 +107,7 @@ router.get('/', auth, async(req, res) => {
         // Communicate with recommender script
         const path = require('path');
         const {spawn} = require('child_process');
-        const subprocess = spawn('python', 
+        const subprocess = spawn('python',
             [path.join(__dirname, '../../recommender/post_recommender.py'),
                 JSON.stringify(rv_trimmed),
                 JSON.stringify(posts_not_in_rv)]);
@@ -121,7 +130,7 @@ router.get('/', auth, async(req, res) => {
             }
             
             // Get the documents and send them
-            post_docs = Post.find({'_id': { $in: post_ids }}, 
+            post_docs = Post.find({'_id': { $in: post_ids }},
             function(err, docs) {
                 // Update cached copies of the recently viewed and recommended lists
                 localStorage.setItem("rv_cached", JSON.stringify(rv_trimmed));
