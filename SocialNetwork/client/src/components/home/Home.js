@@ -6,17 +6,15 @@ import Recommendation from './Recommendation'
 import MyPosts from './Myposts'
 
 const Home = () => {
-
-
     return  (
         <Fragment>
-        <h1 className='large text-primary'>My Posts</h1>
-        <MyPosts></MyPosts>
-        <h1 className='large text-primary'>News Feed</h1>
-        <Recommendation></Recommendation>
+            <h1 className='large text-primary'>My Posts</h1>
+            <MyPosts></MyPosts>
+            <h1 className='large text-primary'>News Feed</h1>
+            <Recommendation></Recommendation>
         </Fragment>
     );
-    };
+};
 
     export default connect(
     )(Home);

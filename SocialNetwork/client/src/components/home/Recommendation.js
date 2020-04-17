@@ -15,9 +15,12 @@ const Recommendation = ({ getRecommendation, recommendation: { recommendation, l
     ) : (
         <Fragment>
           	<div className='recommendation'> 
-			  	{recommendation.map(post => (
+                  {
+                  recommendation && recommendation.length > 0 ? recommendation.map(post => (
 					<PostItem key={post._id} post={post} isHome={true} />
-				))}
+                )) 
+                    : <span>No recommendations available at the moment. Come back later!</span>
+                }
 			</div>
         </Fragment>
     );

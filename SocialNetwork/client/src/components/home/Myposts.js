@@ -18,7 +18,7 @@ const MyPosts = ({ getMyPosts, myposts, loading }) => {
     ) : (
       <Fragment>
           {
-          myposts && myposts.length >0 ? myposts.map(post => {
+          myposts && myposts.length > 0 ? myposts.map(post => {
                 return <PostItem key={post._id} post={post} isHome={true}/>
           })
            : <span>You don't have a post yet, do you want to <Link to="/posts">create one</Link>?</span>
