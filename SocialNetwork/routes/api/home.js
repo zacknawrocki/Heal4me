@@ -7,6 +7,9 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 
+const LocalStorage = require('node-localstorage').LocalStorage;
+let localStorage = new LocalStorage('./scratch');
+
 // @desc   Helper function for removing objects with a property of null value
 function removeNullPropObjectsFromArray(arr, propName) {
     let i = 0;
@@ -24,6 +27,21 @@ function objectIdExistsInArray(arr, id) {
     let i = 0;
     while (i < arr.length && arr[i]['_id'] != id) ++i;
     return i < arr.length;
+}
+
+// @desc   Helper function for determining if all ids in both arrays match
+function check_if_ids_match(arr1, arr2) {
+    if (arr1.length != arr2.length) {
+        return false;
+    }
+    let i = 0;
+    while (i < arr1.length) {
+        if (arr1[i]["_id"] != arr2[i]["_id"]) {
+            return false;
+        }
+        ++i;
+    }
+    return true;
 }
 
 // @route  GET api/recommendation
@@ -46,6 +64,20 @@ router.get('/', auth, async(req, res) => {
             }
         });
         
+        // Retrieve cached list of recently viewed posts and parse into JSON
+        const rv_cached = JSON.parse(localStorage.getItem("rv_cached"));
+        
+        // Check if the recommender script should be run, based on whether the list of 
+        // recently viewed posts has changed since the dashboard was last accessed
+        const ids_match = check_if_ids_match(rv_trimmed, rv_cached);
+
+        // If the list of recently viewed posts is unchanged, send the cached list
+        // of recommended posts that was calculated in a previous dashboard visit
+        if (rv_cached !== null && ids_match) {
+            res.json(JSON.parse(localStorage.getItem("rec_cached")));
+            return 0;
+        }
+        
         // Retrieve all posts published within the last 7 days
         let cutoff = new Date();
         cutoff.setDate(cutoff.getDate()-7);
@@ -57,7 +89,7 @@ router.get('/', auth, async(req, res) => {
 
         // Only consider recommending posts not recently viewed
         posts_not_in_rv = posts.filter(post => !objectIdExistsInArray(rv_trimmed, post._id));
-            
+        
         // For testing purposes
         // console.log('Recently viewed posts: ' + '\n' +  JSON.stringify(rv_trimmed) + '\n');
         // console.log('All posts (within 7 days): ' + '\n' + JSON.stringify(posts) + '\n');
@@ -67,7 +99,7 @@ router.get('/', auth, async(req, res) => {
         const path = require('path');
         const {spawn} = require('child_process');
         const subprocess = spawn('python', 
-            [path.join(__dirname, '../../recommender/recommender.py'),
+            [path.join(__dirname, '../../recommender/post_recommender.py'),
                 JSON.stringify(rv_trimmed),
                 JSON.stringify(posts_not_in_rv)]);
 
@@ -91,6 +123,9 @@ router.get('/', auth, async(req, res) => {
             // Get the documents and send them
             post_docs = Post.find({'_id': { $in: post_ids }}, 
             function(err, docs) {
+                // Update cached copies of the recently viewed and recommended lists
+                localStorage.setItem("rv_cached", JSON.stringify(rv_trimmed));
+                localStorage.setItem("rec_cached", JSON.stringify(docs));
                 res.json(docs);
             });
         });
