@@ -490,6 +490,19 @@ button {
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
+.home-item img {
+  width: 60px;
+}
+.home-item {
+  display: flex;
+}
+.home-item > div:first-child {
+  width: 15%;
+}
+.home-item .comment-box {
+  width: 100%;
+
+}
 
 /* Mobile Styles */
 @media (max-width: 700px) {
@@ -577,4 +590,8 @@ button {
   .post button {
     padding: 0.3rem 0.4rem;
   }
+}
+
+.hide{
+  display: none;
 }
