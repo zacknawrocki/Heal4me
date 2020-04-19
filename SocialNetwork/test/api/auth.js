@@ -4,7 +4,7 @@ const server = require("../../server");
 const should = chai.should();
 chai.use(chaiHttp);
 
-// Helper function for deleting mock users in clean-up
+// Clean up function for deleting mock Users
 const deleteUserByEmail = (email) => {
     chai.request(server)
         .delete('/api/users/')
