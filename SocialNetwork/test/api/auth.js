@@ -44,14 +44,14 @@ describe('User Authentication', function() {
 describe('User Authentication', function() {
     describe('Register Failed', function() {
         const sampleUser = {
-            "name": "AstronautNeil",
-            "email": "astronautneil@gmail.com",
-            "password": "sampl"
+            'name': 'AstronautNeil',
+            'email': 'astronautneil@gmail.com',
+            'password': 'sampl'
         };
         
         it('should throw errors and return status 400', done => {
             chai.request(server)
-            .post("/api/users")
+            .post('/api/users')
             .send(sampleUser)
             .end((err, res) => {
                 console.log(res.body);
