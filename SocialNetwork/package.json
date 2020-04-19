@@ -1,13 +1,14 @@
 {
-  "name": "socailnetwork",
+  "name": "heal4me",
   "version": "1.0.0",
-  "description": "Socialnetwork",
+  "description": "Heal4Me source code repository.",
   "main": "server.js",
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "mocha test/* || true"
   },
   "author": "Kailing",
   "license": "ISC",
@@ -27,7 +28,9 @@
     "uuid": "^3.4.0"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
     "concurrently": "^5.1.0",
+    "mocha": "^7.1.1",
     "nodemon": "^2.0.2"
   }
 }

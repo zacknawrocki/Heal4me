@@ -7,12 +7,10 @@ import Spinner from '../layout/Spinner';
 import PostItem from '../posts/PostItem';
 import { getMyPosts } from '../../actions/post';
 
-
-
 const MyPosts = ({ getMyPosts, myposts, loading }) => {
     useEffect(() => {
         getMyPosts();
-    }, []);
+    }, [getMyPosts]);
     return loading ? (
       <Spinner />
     ) : (

@@ -9,7 +9,7 @@ import CommentItem from './CommentItem.js';
 import { getPost } from '../../actions/post';
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
-  useEffect(() => { 
+  useEffect(() => {
     getPost(match.params.id);
   }, [getPost, match.params.id]);
 
