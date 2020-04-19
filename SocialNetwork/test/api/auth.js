@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const server = require("../../server");
+const server = require('../../server');
 const should = chai.should();
 chai.use(chaiHttp);
 
@@ -20,19 +20,19 @@ const deleteUserByEmail = (email) => {
 describe('User Authentication', function() {
     describe('Register', function() {
         const sampleUser = {
-            "name": "AstronautNeil",
-            "email": "astronautneil@gmail.com",
-            "password": "samplePassword"
+            'name': 'AstronautNeil',
+            'email': 'astronautneil@gmail.com',
+            'password': 'samplePassword'
         };
         
         it('should register a user', done => {
             chai.request(server)
-            .post("/api/users")
+            .post('/api/users')
             .send(sampleUser)
             .end((err, res) => {
                 console.log(res.body);
                 res.should.have.status(200);
-                deleteUserByEmail("astronautneil@gmail.com");
+                deleteUserByEmail('astronautneil@gmail.com');
             });
             done();
         });
