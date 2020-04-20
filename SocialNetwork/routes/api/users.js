@@ -26,11 +26,10 @@ async (req, res) => {
     const { name, email, password } = req.body;
 
     try{
-
-        let user = await User.findOne({email});
+        let user = await User.findOne({ email: email });
 
         if(user) {
-           return res.status(400).json({errors: [{msg: 'User already exists'}]});
+            return res.status(400).json({errors: [{msg: 'User already exists'}]});
         }
 
         // Get users gravatr
@@ -71,7 +70,7 @@ async (req, res) => {
             });    
     } catch(err){
         console.error(err.message);
-        res.status(500).sned('server error');
+        res.status(500).send('server error');
 
     }
 });
@@ -83,19 +82,20 @@ router.delete('/', async (req, res) => {
     const { email } = req.body;
 
     try {
-        let user = await User.findOne({email});
-
+        let user = await User.findOne({ email });
+        
         if (!user) {
             return res.status(400).json({errors: [{msg: 'User does not exist'}]});
         }
 
-        User.deleteOne({email: email}, function(err) {
+        await User.collection.dropIndex({ email });
+        await User.deleteOne({email}, function(err) {
             if (err) throw err;
             res.status(200).json({msg: "User deleted"});
-        })
+        });
     } catch(err){
         console.error(err.message);
-        res.status(500).sned('server error');
+        res.status(500).send('server error');
 
     }
 });

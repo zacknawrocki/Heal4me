@@ -1,4 +1,5 @@
 {
     "mongoURI": "mongodb+srv://fuk:fuk@heal4me-ja80h.mongodb.net/test?retryWrites=true&w=majority",
+    "mongoURI-Test": "mongodb+srv://fuk:fuk@heal4me-ja80h.mongodb.net/heal4me_test?retryWrites=true&w=majority",
     "jwtSecret": "mysecrettoken"
 }
