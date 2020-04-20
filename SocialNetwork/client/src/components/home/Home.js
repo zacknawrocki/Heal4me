@@ -10,6 +10,7 @@ const Home = () => {
         <Fragment>
             <h1 className='large text-primary'>My Posts</h1>
             <MyPosts></MyPosts>
+            <br/><br/>
             <h1 className='large text-primary'>News Feed</h1>
             {/* <Recommendation></Recommendation> */}
         </Fragment>
