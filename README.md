@@ -1,7 +1,7 @@
 # What is Heal4Me?
 
 ## The Run-Down
-Heal4Me is an online platform focused on providing its users with the tools they need to fight mental illness. We aim to create an semi-anonymous social network that's more comfortable, accessible, and/or affordable (free!) than in-person group meetings or therapy. We're always around to help!
+Heal4Me is an online platform, focused on providing its users with the tools they need to fight mental illnesses. We aim to create a semi-anonymous social network that's more comfortable, accessible, and/or affordable (free!) than in-person group meetings or therapy. We're always around to help!
 
 While Heal4Me is predominantly a crowd-sourced mental health support forum, akin to a virtual 24/7 Alcoholics Anonymous, our defining feature lies in our personalized recommendation algorithm. Using our algorithm, users can browse suggested groups and posts, and explore a variety of resources from books to meditation tutorials.
 
