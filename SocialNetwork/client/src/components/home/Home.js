@@ -11,7 +11,7 @@ const Home = () => {
             <h1 className='large text-primary'>My Posts</h1>
             <MyPosts></MyPosts>
             <h1 className='large text-primary'>News Feed</h1>
-            <Recommendation></Recommendation>
+            {/* <Recommendation></Recommendation> */}
         </Fragment>
     );
 };

@@ -65,6 +65,7 @@ const CreateProfile = ({
 					<select name='occupation' value={occupation} onChange={e => onChange(e)}>
 						<option value='0'>* Select your occupation</option>
 						<option value='Teacher'>Teacher</option>
+						<option value='Student'>Student</option>
 						<option value='Mechanic'>Mechanic</option>
 						<option value='Artist'>Artist</option>
 						<option value='administrator'>Administrator</option>
@@ -93,8 +94,8 @@ const CreateProfile = ({
                 <div className='form-group'>
                     <select name='gender' value={gender} onChange={e => onChange(e)}>
 						<option value='0'>Gender</option>
-						<option value='Man'>Man</option>
-                        <option value='Woman'>Woman</option>
+						<option value='Man'>Male</option>
+                        <option value='Woman'>Female</option>
                         <option value='Genderqueer'>Genderqueer/Non-Binary</option>
                         <option value='Unknown'>Prefer not to disclose</option>               
                     </select>	
