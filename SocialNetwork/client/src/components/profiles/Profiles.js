@@ -24,9 +24,15 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
           </p>
           <div className='profiles'>
             {profiles.length > 0 ? (
-              profiles.map(profile => (
-                <ProfileItem key={profile._id} profile={profile} />
-              ))
+              profiles.map(profile => {
+                const wordArr = profile.bio.split(' ');
+                if (wordArr.length > 50) {
+                    profile.bio = wordArr.splice(0, 50).join(' ') + " ...";
+                }
+                return (
+                  <ProfileItem key={profile._id} profile={profile} />
+                )
+              })
             ) : (
               <h4>No profiles found..</h4>
             )}
