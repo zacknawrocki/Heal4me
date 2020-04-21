@@ -17,5 +17,4 @@ const Home = () => {
     );
 };
 
-    export default connect(
-    )(Home);
+export default connect()(Home);
