@@ -1,20 +1,19 @@
 import sys
 import csv
 
-# Separate the composite dataset into categories with their own
-# CSV files. The categories are denoted by file_dict keys
+# Separate the composite dataset into categories of posts that sugges either 
+# suicidal behavior/attempts/ideation (negative) or supportive/indicator (negative)
 def sort(filename):
+    positive_set = { "Supportive" }
+    negative_set = { "Ideation", "Attempt", "Behavior", "Indicator "}
+
     file_dict = {
-    'Ideation': [
-        open('ideation.csv', 'w'),
+    'positive': [
+        open('positive.csv', 'w'),
         None
     ], 
-    'Behavior': [
-        open('behavior.csv', 'w'),
-        None
-    ],
-    'Attempt': [
-        open('attempt.csv', 'w'),
+    'negative': [
+        open('negative.csv', 'w'),
         None
     ]}
 
@@ -34,8 +33,10 @@ def sort(filename):
                 for key in file_dict.keys():
                     file_dict[key][1].writerow(row)
                 at_header = not at_header
-            elif row[2] in file_dict.keys():
-                file_dict[row[2]][1].writerow(row)
+            elif row[2] in positive_set:
+                file_dict['positive'][1].writerow(row)
+            elif row[2] in negative_set:
+                file_dict['negative'][1].writerow(row)
 
     # Close all files
     for key in file_dict.keys():
