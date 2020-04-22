@@ -1,25 +1,16 @@
 import sys
 import csv
 
-# Separate the composite dataset into categories of posts that sugges either 
-# suicidal behavior/attempts/ideation (negative) or supportive/indicator (negative)
 def sort(filename):
-    positive_set = { "Supportive" }
-    negative_set = { "Ideation", "Attempt", "Behavior", "Indicator "}
+    # Categorize each post as either suggesting suicidal 
+    # behavior/attempts/ideation/indicator (negative) or 
+    # being supportive (positive)
+    positive_set = { 'Supportive', 'Indicator' }
+    negative_set = { 'Behavior', 'Attempt', 'Ideation' } 
 
-    file_dict = {
-    'positive': [
-        open('positive.csv', 'w'),
-        None
-    ], 
-    'negative': [
-        open('negative.csv', 'w'),
-        None
-    ]}
-
-    # Open a CSV Writer for each file
-    for key in file_dict.keys():
-        file_dict[key][1] = csv.writer(file_dict[key][0], 
+    # Open a file instance and its corresponding CSV Writer
+    output_file = open("si_data_sorted.csv", 'w')
+    output_writer = csv.writer(output_file, \
         delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
     # Open a context manager for the input file
@@ -30,17 +21,14 @@ def sort(filename):
         at_header = True
         for row in csv_reader:
             if at_header:
-                for key in file_dict.keys():
-                    file_dict[key][1].writerow(row)
+                output_writer.writerow(row)
                 at_header = not at_header
             elif row[2] in positive_set:
-                file_dict['positive'][1].writerow(row)
+                output_writer.writerow([row[0], row[1], "Positive"])
             elif row[2] in negative_set:
-                file_dict['negative'][1].writerow(row)
-
-    # Close all files
-    for key in file_dict.keys():
-        file_dict[key][0].close()
+                output_writer.writerow([row[0], row[1], "Negative"])
+    
+    output_file.close()
         
 
 if __name__ == '__main__':
