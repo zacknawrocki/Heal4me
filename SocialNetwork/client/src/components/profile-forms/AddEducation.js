@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, {Fragment, useState} from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addEducation } from '../../actions/profile';
+import {connect} from 'react-redux';
+import {addEducation} from '../../actions/profile';
 
-const AddEducation = ({ addEducation, history }) => {
+const AddEducation = ({addEducation, history}) => {
   const [formData, setFormData] = useState({
     school: '',
     degree: '',
@@ -14,9 +14,9 @@ const AddEducation = ({ addEducation, history }) => {
     current: false,
     description: ''
   });
-
+  
   const [toDateDisabled, toggleDisabled] = useState(false);
-
+  
   const {
     school,
     degree,
@@ -26,15 +26,15 @@ const AddEducation = ({ addEducation, history }) => {
     current,
     description
   } = formData;
-
+  
   const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
+    setFormData({...formData, [e.target.name]: e.target.value});
+  
   return (
     <Fragment>
       <h1 className='large text-primary'>Add Your Education</h1>
       <p className='lead'>
-        <i className='fas fa-code-branch' /> Add any school that you
+        <i className='fas fa-code-branch'/> Add any school that you
         have attended
       </p>
       <small>* = required field</small>
@@ -91,7 +91,7 @@ const AddEducation = ({ addEducation, history }) => {
               checked={current}
               value={current}
               onChange={() => {
-                setFormData({ ...formData, current: !current });
+                setFormData({...formData, current: !current});
                 toggleDisabled(!toDateDisabled);
               }}
             />{' '}
@@ -118,7 +118,7 @@ const AddEducation = ({ addEducation, history }) => {
             onChange={e => onChange(e)}
           />
         </div>
-        <input type='submit' className='btn btn-primary my-1' />
+        <input type='submit' className='btn btn-primary my-1'/>
         <Link className='btn btn-light my-1' to='/dashboard'>
           Go Back
         </Link>
@@ -133,5 +133,5 @@ AddEducation.propTypes = {
 
 export default connect(
   null,
-  { addEducation }
+  {addEducation}
 )(withRouter(AddEducation));

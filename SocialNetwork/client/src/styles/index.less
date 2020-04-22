@@ -1,0 +1,124 @@
+
+.like-btn{
+  &.on{
+    color: #00a1d6;
+  }
+}
+
+.gallery{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  .ant-alert{
+    font-weight: bold;
+    width: 160px;
+    margin-bottom: 10px;
+  }
+  img{
+    width: auto;
+    height: auto;
+    max-width: 200px;
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.2);
+      border: 2px solid #fff;
+      transition: transform ease-in-out .3s;
+    }
+  }
+  .gallery-content{
+    width: 612px;
+    >.react-photo-gallery--gallery>div{
+      justify-content: flex-end;
+    }
+  }
+  .recommendation{
+    flex-grow: 1;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    max-width: unset;
+    margin-right: 0;
+    padding: 0 40px;
+  }
+}
+
+.recommendation{
+
+}
+
+
+
+.refresh{
+  transform: translate(180px, -45px);
+  font-size: 24px;
+  color: #52c41a;
+}
+.ant-tabs-bar{
+  position: fixed;
+  z-index: 3000;
+  background: #fff;
+}
+
+.ant-tabs .ant-tabs-top-content, .ant-tabs .ant-tabs-bottom-content{
+  margin-top: 50px;
+}
+
+.footer{
+  .ant-alert{
+    width: 100%;
+    margin-top: 20px;
+    .ant-alert-info{
+      background: #e8ffe6;
+    }
+    .ant-alert-message{
+      color: #359406;
+    }
+  }
+  &-link{
+    display: flex;
+    justify-content: space-between;
+    img{
+      cursor: pointer;
+      margin-left: 120px;
+      &:last-child{
+        margin-right: 120px;
+      }
+      &:hover{
+        transform: scale(1.2);
+        border: 2px solid #fff;
+        transition: transform ease-in-out .3s;
+      }
+    }
+  }
+}
+.profiles, .profiles .ant-spin{
+  padding: 16px 24px;
+}
+.sub-title{
+  padding: 5px 24px;
+}
+.profiles{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  .profile-item{
+    margin-right: 30px;
+    margin-bottom: 20px;
+    .ant-card-cover{
+      display: flex;
+      margin: auto;
+      justify-content: center;
+      img{
+        margin-top: 5px;
+        border-radius: 50%;
+        width: 50%;
+      }
+    }
+    .ant-card-meta-detail{
+      text-align: center;
+    }
+  }
+}

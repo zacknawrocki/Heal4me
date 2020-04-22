@@ -21,7 +21,7 @@ router.get('/me', auth, async (req, res) => {
     }).populate('user', ['name', 'avatar']);
 
     if (!profile) {
-      return res.status(400).json({ msg: 'There is no profile for this user' });
+      return res.json({ msg: 'There is no profile for this user', success: false });
     }
 
     res.json(profile);
@@ -79,7 +79,7 @@ router.post(
         : hobbies.split(',').map(hobby => ' ' + hobby.trim()),
       occupation,
       age,
-      gender    
+      gender
     };
 
     // Build social object and add to profileFields

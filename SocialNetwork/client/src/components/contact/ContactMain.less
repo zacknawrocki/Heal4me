@@ -1,4 +1,4 @@
-#contact-main{
+#contact-main {
   width: 800px;
   height: 600px;
   margin: 90px auto;
@@ -9,119 +9,146 @@
   overflow: hidden;
   position: relative;
   background: #ffffff;
-  .ant-list{
+
+  .ant-list {
     padding: 0 !important;
-    .ant-list-item{
+
+    .ant-list-item {
       padding: 20px 15px !important;
     }
   }
-  .gm-scroll-view{
+
+  .gm-scroll-view {
     width: auto !important;
   }
-  span, h2, h1{
+
+  span, h2, h1 {
     color: white;
     margin-bottom: 0;
   }
-  h2{
+
+  h2 {
     font-size: 14px;
   }
-  h1{
+
+  h1 {
     font-size: 15px;
     text-align: center;
   }
-  .contact-left-bar{
+
+  .contact-left-bar {
     width: 200px;
     height: 100%;
     background-color: #2e3238;
     color: white;
-    .ant-list-item-meta-description{
-      span{
+
+    .ant-list-item-meta-description {
+      span {
         width: 130px;
         overflow: hidden;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
         white-space: nowrap;
         display: inline-block;
       }
     }
-    .team{
+
+    .team {
       margin-left: 5px;
     }
-    .contact-avatar{
+
+    .contact-avatar {
       padding: 15px;
       display: flex;
       flex-direction: row;
       align-items: center;
-      img{
+
+      img {
         width: 40px;
         height: 40px;
       }
-      p{
+
+      p {
         margin: 0 0 0 15px;
       }
     }
-    .contact-search{
+
+    .contact-search {
       text-align: center;
       position: relative;
     }
+
     // friend list style
-    .contact-list{
+    .contact-list {
       margin-top: 16px;
-      li{
+
+      li {
         padding: 9pt 15px;
         display: flex;
         flex-direction: row;
         align-items: center;
         transition: .3s linear all;
         cursor: pointer;
-        img{
+
+        img {
           width: 30px;
           height: 30px;
         }
-        p{
+
+        p {
           margin: 0 0 0 15px;
         }
       }
-      .active{
-        background-color: hsla(0,0%,100%,.1);
+
+      .active {
+        background-color: hsla(0, 0%, 100%, .1);
       }
-      .hover{
-        background-color: hsla(0,0%,100%,.03);
+
+      .hover {
+        background-color: hsla(0, 0%, 100%, .03);
       }
-      .my-scroll-bar{
+
+      .my-scroll-bar {
         height: 484px;
       }
 
     }
   }
-  .contact-main-area{
+
+  .contact-main-area {
     display: flex;
     flex-direction: column;
     flex: 1;
-    .main-top{
+
+    .main-top {
       background-color: #eee;
       height: 450px;
       overflow: hidden;
-      .top-name{
+
+      .top-name {
         width: 100%;
         height: 50px;
-        border-bottom: 1px rgba(0,0,0,.1) solid;
+        border-bottom: 1px rgba(0, 0, 0, .1) solid;
         display: flex;
         flex-direction: row;
         justify-content: center;
         line-height: 50px;
-        h2{
+
+        h2 {
           color: black;
           font-size: 18px;
         }
       }
-      .top-main{
+
+      .top-main {
         padding: 0px 15px;
         height: 400px;
         overflow-y: auto;
       }
-      .main-message{
+
+      .main-message {
         text-align: center;
         margin-bottom: 15px;
+
         span {
           font-size: 9pt;
           color: #fff;
@@ -132,19 +159,23 @@
           display: inline-block;
           margin: 7px 0;
         }
-        .message-box{
+
+        .message-box {
           display: flex;
           flex-direction: row;
           align-items: center;
-          img{
+
+          img {
             width: 30px;
             height: 30px;
             margin-right: 10px;
           }
-          .right{
+
+          .right {
             margin-right: 0;
           }
-          .message-text{
+
+          .message-text {
             padding: 0 10px;
             max-width: calc(100% - -15px);
             min-height: 30px;
@@ -156,7 +187,8 @@
             border-radius: 4px;
             color: black;
             position: relative;
-            &:before{
+
+            &:before {
               content: "";
               position: absolute;
               top: 9px;
@@ -165,68 +197,82 @@
               border-right-color: #fafafa;
             }
           }
-          .text-title{
+
+          .text-title {
             font-size: 12px;
-            color: rgba(0,0,0, .5);
+            color: rgba(0, 0, 0, .5);
             text-align: right;
             padding-right: 15px;
           }
-          .text-title-left{
+
+          .text-title-left {
             text-align: left;
             font-size: 12px;
-            color: rgba(0,0,0,.5);
+            color: rgba(0, 0, 0, .5);
           }
-          .message-text-right{
+
+          .message-text-right {
             margin-right: 15px;
             background: #b2e281;
             max-width: calc(100% - 15px);
-            &:before{
+
+            &:before {
               left: 100%;
               border-right-color: transparent;
               border-left-color: #b2e281;
             }
           }
         }
-        .message-box-right{
+
+        .message-box-right {
           justify-content: flex-end;
         }
       }
     }
-    .main-bottom{
+
+    .main-bottom {
       background: #ffffff;
       height: 159px;
       position: relative;
       color: black;
-      textarea{
+
+      textarea {
         padding: 20px;
         padding-bottom: 0;
-        resize:none;
+        resize: none;
         border: none;
         outline: none;
       }
-      button{
+
+      button {
         float: right;
         margin-bottom: 10px;
-        span{
+
+        span {
           color: black;
         }
       }
-      .cancel{
+
+      .cancel {
         background-color: #F5F5F5;
         border-color: #E5E5E5;
-        span{
-          color: rgba(0,0,0,.5);
+
+        span {
+          color: rgba(0, 0, 0, .5);
         }
       }
-      .emoji-area{
+
+      .emoji-area {
         width: 100%;
-        background:#f0f0f0;
-        #EmojiPicker{
+        background: #f0f0f0;
+
+        #EmojiPicker {
           overflow: auto;
           border: none;
           outline: none;
         }
-        .container-emoji{
+
+        .container-emoji {
           position: absolute;
           left: 0;
           bottom: 100%;
@@ -234,15 +280,18 @@
           width: 325px;
         }
       }
-      .bottom-button{
+
+      .bottom-button {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
-        button{
+
+        button {
           margin-right: 10px;
         }
       }
-      .el-textarea__inner{
+
+      .el-textarea__inner {
         border: none;
         outline: none;
         color: black;
@@ -250,7 +299,8 @@
         font-size: 9pt;
       }
     }
-    .gm-scroll-view{
+
+    .gm-scroll-view {
       background: #eee;
     }
   }

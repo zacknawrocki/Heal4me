@@ -22,9 +22,10 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
-// @route  POST api/auth
+// @route  GET api/auth
 // @desc   Authenticate user & get token
 // @access Public
+
 router.post('/', [
     check('email', 'Please include a valid email').isEmail(),
     check('password','Password is required').exists()
@@ -42,7 +43,7 @@ async (req, res) => {
         let user = await User.findOne({email});
 
         if(!user) {
-            return res.status(400).json({errors: [{msg: 'Invalid password or email'}]});
+           return res.status(400).json({errors: [{msg: 'Invalid password or email'}]});
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
@@ -69,7 +70,7 @@ async (req, res) => {
             });    
     } catch(err){
         console.error(err.message);
-        res.status(500).send('server error');
+        res.status(500).sned('server error');
     }
 });
 

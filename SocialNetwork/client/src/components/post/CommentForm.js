@@ -1,35 +1,39 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addComment } from '../../actions/post';
+import {connect} from 'react-redux';
+import {addComment} from '../../actions/post';
+import {Alert, Button, Form, Input, message} from "antd";
 
-const CommentForm = ({ postId, addComment }) => {
+const FormItem = Form.Item
+const CommentForm = ({postId, addComment}) => {
   const [text, setText] = useState('');
-
+  const [loading, setloading] = useState(false);
+  
+  const handleAddComment = ()=>{
+    setloading(true)
+    addComment(postId, {text}).then(res=>{
+      message.success('post success')
+      setText('');
+    }).finally(()=>{
+      setloading(false)
+    });
+  }
+  
   return (
     <div className='post-form'>
-      <div className='bg-primary p'>
-        <h3>Leave a Comment</h3>
-      </div>
-      <form
-        className='form my-1'
-        onSubmit={e => {
-          e.preventDefault();
-          addComment(postId, { text });
-          setText('');
-        }}
-      >
-        <textarea
-          name='text'
-          cols='30'
-          rows='5'
-          placeholder='Comment the post'
-          value={text}
-          onChange={e => setText(e.target.value)}
-          required
-        />
-        <input type='submit' className='btn btn-dark my-1' value='Submit' />
-      </form>
+      <Alert message="Comment the post" type="info" showIcon />
+      <Form className="form my-1" onFinish={handleAddComment}>
+        <FormItem rules={[{required: true, message: 'Please input your Comment!'}]}>
+          <Input.TextArea placeholder='happy to post' value={text}
+                          autoSize={{minRows: 3, maxRows: 6}}
+                          onChange={event => setText(event.target.value)}/>
+        </FormItem>
+        <Form.Item>
+          <Button type="primary" disabled={!text.length} size="large" htmlType="submit" loading={loading}>
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
     </div>
   );
 };
@@ -40,5 +44,5 @@ CommentForm.propTypes = {
 
 export default connect(
   null,
-  { addComment }
+  {addComment}
 )(CommentForm);

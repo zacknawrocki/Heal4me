@@ -4,8 +4,8 @@ import Moment from 'react-moment';
 import moment from 'moment';
 
 const ProfileExperience = ({
-  experience: { company, title, location, current, to, from, description }
-}) => (
+                             experience: {company, title, location, current, to, from, description}
+                           }) => (
   <div>
     <h3 className="text-dark">{company}</h3>
     <p>

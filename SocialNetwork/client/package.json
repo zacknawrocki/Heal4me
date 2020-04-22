@@ -10,7 +10,6 @@
     "@testing-library/user-event": "^7.2.1",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
-    "ant-design": "^1.0.0",
     "antd": "^4.0.3",
     "axios": "^0.19.2",
     "babel-eslint": "10.0.3",
@@ -64,7 +63,6 @@
     "redux-thunk": "^2.3.0",
     "resolve": "1.15.0",
     "resolve-url-loader": "3.1.1",
-    "sass-loader": "8.0.2",
     "semver": "6.3.0",
     "socket.io-client": "^2.3.0",
     "style-loader": "0.23.1",
@@ -74,7 +72,8 @@
     "webpack": "4.41.5",
     "webpack-dev-server": "3.10.2",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1"
+    "workbox-webpack-plugin": "4.3.1",
+    "react-photo-gallery": "8.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",

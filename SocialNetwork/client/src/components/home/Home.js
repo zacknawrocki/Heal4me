@@ -1,20 +1,42 @@
-import React, { Fragment, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
+import React, {Fragment, useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import { withRouter } from 'react-router-dom'
 import Recommendation from './Recommendation'
+import PsychologicalCounseling from './Counseling'
 import MyPosts from './Myposts'
+import {Tabs, } from "antd";
+const { TabPane } = Tabs;
 
-const Home = () => {
-    return  (
-        <Fragment>
-            <h1 className='large text-primary'>My Posts</h1>
-            <MyPosts></MyPosts>
-            <br/><br/>
-            <h1 className='large text-primary'>News Feed</h1>
-            {/* <Recommendation></Recommendation> */}
-        </Fragment>
-    );
+const Home = (props) => {
+  const [defaultTab, setDefaultTab] = useState('MyPosts');
+  const onTabClick = (tab)=>{
+    setDefaultTab(tab)
+    props.history.push('/home', {
+      tab
+    });
+  }
+  
+  useEffect(()=>{
+    // const tab = props.location.search.match(/tab=(.*\w+)$/)[1]
+    // if (tab) {
+    //   setDefaultTab(tab)
+    // }
+  }, [])
+  
+  return (
+    <Fragment>
+      <Tabs defaultActiveKey={defaultTab} activeKey={defaultTab} type="card" onTabClick={onTabClick}>
+        <TabPane tab="My Posts" key="MyPosts">
+          <MyPosts />
+        </TabPane>
+        <TabPane tab="News Feed" key="NewsFeed">
+           <Recommendation />
+           <PsychologicalCounseling />
+        </TabPane>
+      </Tabs>
+    </Fragment>
+  );
 };
 
-export default connect()(Home);
+export default connect(
+)(withRouter(Home));

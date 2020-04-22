@@ -1,22 +1,23 @@
-import axios from 'axios';
+import service from '../api';
 
-import {
-    GET_RECOMMENDATION,
-    RECOMMENDATION_ERROR
-} from './types';
+import {GET_RECOMMENDATION} from './types';
 
 export const getRecommendation = () => async dispatch => {
-    try {
-        const res = await axios.get('/api/home');
-        dispatch({
-            type: GET_RECOMMENDATION,
-            payload: res.data
-        });
-      } catch (err) {
-            dispatch({
-            type: RECOMMENDATION_ERROR,
-            payload: { msg: err.response.statusText, status: err.response.status }
-        });
-    }
+  try {
+    const res = await service.get('/api/home');
+    return dispatch({
+      type: GET_RECOMMENDATION,
+      payload: res.data
+    });
+  } catch (err) {
+    return false
+  }
 };
-    
+
+export const getImages = () => {
+  return service.get('/api/images')
+}
+
+export const getGrade = () => {
+  return service.get('/api/grade')
+}

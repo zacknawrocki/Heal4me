@@ -1,33 +1,54 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import ProfileItem from './ProfileItem';
 import { getProfiles } from '../../actions/profile';
 import { FaSearchengin } from 'react-icons/fa';
+import {message, PageHeader, Spin} from "antd";
+import {SettingOutlined,UserOutlined, MailOutlined,LockOutlined,SearchOutlined } from '@ant-design/icons'
+import service from "../../api";
 
-const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
+
+const Profiles = ({ getProfiles }) => {
+  const [loading, setLoading] = useState(true);
+  const [profiles, setprofiles] = useState([]);
+  
+  const ss = () =>{
+    setLoading(true)
+    service('/api/profile').then(res=>{
+      console.log(res);
+      setprofiles(res.data||[])
+      message.success('Users Loaded Successfully!')
+    }).finally(()=>{
+      setLoading(false)
+    });
+  }
+  
   useEffect(() => {
-    getProfiles();
-  }, [getProfiles]);
-
+    ss()
+  }, [1]);
+  
   return (
     <Fragment>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <Fragment>
-          <h1 className='large text-primary'>Users</h1>
-          <p className='lead'>
-            <FaSearchengin /> Browse and connect with
-            people all over the world
-          </p>
+      <PageHeader
+        ghost={false}
+        title={
+          <div><UserOutlined />Users</div>
+        }
+      />
+      <div className="sub-title">
+        <SearchOutlined style={{fontSize: '20px', color: '#1296db'}}/> Browse and connect with
+        people all over the world
+      </div>
+      {
+        loading ? (<Spin />) : (
           <div className='profiles'>
             {profiles.length > 0 ? (
               profiles.map(profile => {
                 const wordArr = profile.bio.split(' ');
                 if (wordArr.length > 50) {
-                    profile.bio = wordArr.splice(0, 50).join(' ') + " ...";
+                  profile.bio = wordArr.splice(0, 50).join(' ') + " ...";
                 }
                 return (
                   <ProfileItem key={profile._id} profile={profile} />
@@ -36,6 +57,30 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
             ) : (
               <h4>No profiles found..</h4>
             )}
+          </div>
+
+        )
+      }
+
+
+    </Fragment>
+  )
+
+  return (
+    <Fragment>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <PageHeader
+            ghost={false}
+            title={
+              <div><UserOutlined />Users</div>
+            }
+          />
+          <div className="sub-title">
+            <SearchOutlined style={{fontSize: '20px', color: '#1296db'}}/> Browse and connect with
+            people all over the world
           </div>
         </Fragment>
       )}

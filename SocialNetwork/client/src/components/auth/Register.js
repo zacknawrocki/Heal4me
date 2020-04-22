@@ -1,101 +1,115 @@
-import React, { Fragment, useState } from 'react';
-import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { setAlert } from '../../actions/alert';
-import { register } from '../../actions/auth';
+import React, {Fragment, useState} from 'react';
+import {connect} from 'react-redux';
+import {Link, Redirect, withRouter} from 'react-router-dom';
+import {setAlert} from '../../actions/alert';
+import {register} from '../../actions/auth';
 import PropTypes from 'prop-types'
+import {Form, Input, Upload, Button, PageHeader, message} from "antd";
+import {UploadOutlined,UserOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
 
 
-const Register = ({setAlert, register, isAuthenticated}) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    password2: ''
-  });
-
-  const { name, email, password, password2 } = formData;
-
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = async e => {
-    e.preventDefault();
-    if (password !== password2) {
-      setAlert('Passwords do not match', 'danger');
-    } else {
-      register({ name, email, password });
-    }
+const Register = ({history, setAlert, register, isAuthenticated}) => {
+  const [form] = Form.useForm();
+  
+  const onSubmit = values => {
+    register(values).then(res=>{
+      message.success('Registration Succeed!')
+      history.push('/dashboard')
+    }).catch(()=>{
+      message.error('Registration Failed!')
+    });
   };
-
-  if(isAuthenticated) {
-    return <Redirect to='/dashboard' />;
-  }
-
+  
   return (
     <Fragment>
-      <h1 className='large text-primary'>Sign Up</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Create Your Account
-      </p>
-      <form className='form' onSubmit={e => onSubmit(e)}>
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='Name'
-            name='name'
-            value={name}
-            onChange={e => onChange(e)}
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='email'
-            placeholder='Email Address'
-            name='email'
-            value={email}
-            onChange={e => onChange(e)}
-          />
-          <small className='form-text'>
+      <PageHeader
+        ghost={false}
+        title="Sign Up"
+        subTitle={
+          <span><UserOutlined /> Create Your Account</span>
+        }
+      >
+        <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} form={form}
+              name="control-hooks" onFinish={onSubmit} scrollToFirstError>
+          <Form.Item name="name" label="Name" rules={[{ required: true }]}>
+            <Input placeholder="Name" prefix={<UserOutlined />} />
+          </Form.Item>
+          <Form.Item name="email" label="E-mail"  rules={[
+            {
+              type: 'email',
+              message: 'The input is not valid E-mail!',
+            },
+            {
+              required: true,
+              message: 'Please input your E-mail!',
+            },
+          ]}>
+            <Input placeholder="Email Address" type="email" prefix={<MailOutlined />} />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password min={6} prefix={<LockOutlined/>} />
+          </Form.Item>
+          <Form.Item
+            name="password2"
+            label="Confirm Password"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('The two passwords that you entered do not match!');
+                },
+              }),
+            ]}
+          >
+            <Input.Password min={6} prefix={<LockOutlined />} />
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 4 }}>
             This site uses Gravatar so if you want a profile image, use a
             Gravatar email
-          </small>
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Password'
-            name='password'
-            value={password}
-            onChange={e => onChange(e)}
-          />
-        </div>
-        <div className='form-group'>
-          <input
-            type='password'
-            placeholder='Confirm Password'
-            name='password2'
-            value={password2}
-            onChange={e => onChange(e)}
-          />
-        </div>
-        <input type='submit' className='btn btn-primary' value='Register' />
-      </form>
-      <p className='my-1'>
-        Already have an account? <Link to='/login'>Sign In</Link>
-      </p>
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 8 }}>
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
+          </Form.Item>
+          <Form.Item wrapperCol={{ offset: 6 }}>
+            <p className='my-1' style={{fontSize: '20px'}}>
+              Already have an account? <Link to='/login'>Sign In</Link>
+            </p>
+          </Form.Item>
+        </Form>
+       
+      </PageHeader>
     </Fragment>
   );
 };
 
 Register.propTypes = {
-    setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired,
-    isAuthenticated: PropTypes.bool,
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps, { setAlert, register})(Register);
+export default connect(mapStateToProps, {setAlert, register})(withRouter(Register));

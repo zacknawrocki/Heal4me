@@ -21,8 +21,8 @@ router.get('/my', [auth, [
     check('text', 'Text is required').not().isEmpty()
 ]],
 async(req, res) => {
-    const data = await Post.find({user: req.user.id})
-    res.json(data)
+  const data = await Post.find({user: req.user.id})
+  res.json(data)
 }
 )
 
@@ -58,7 +58,7 @@ async(req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-} 
+}
 );
 
 // @route  GET api/posts
@@ -68,7 +68,7 @@ router.get('/', auth, async(req, res) => {
     try {
         const posts = await Post.find().sort({ date: -1 });
         res.json(posts);
-         
+        
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
@@ -94,7 +94,7 @@ router.get('/:id', auth, async(req, res) => {
         // await user.save();
         let postPos = findPropertyInArrayOfObjects(user.recently_viewed, "post", post.id);
         
-        if (postPos >= 0) {  
+        if (postPos >= 0) {
             user.recently_viewed.splice(postPos, 1);
             user.recently_viewed.unshift({ post: post.id });
         } else {
@@ -108,7 +108,7 @@ router.get('/:id', auth, async(req, res) => {
         await user.save();
 
         res.json(post);
-         
+        
     } catch (err) {
         console.error(err.message);
         if(err.kind == 'ObjectId') {
@@ -212,7 +212,7 @@ async(req, res) => {
     if(!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array()});
     }
-    try { 
+    try {
         const user = await User.findById(req.user.id).select('-password');
 
         const post = await Post.findById(req.params.id);
@@ -234,7 +234,7 @@ async(req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-} 
+}
 );
 
 // @route  DELETE api/posts/comment/:id/:comment_id
@@ -270,6 +270,6 @@ async(req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-} 
+}
 );
 module.exports = router;

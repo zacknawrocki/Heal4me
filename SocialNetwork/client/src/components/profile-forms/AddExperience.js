@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, {Fragment, useState} from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addExperience } from '../../actions/profile';
+import {connect} from 'react-redux';
+import {addExperience} from '../../actions/profile';
 
-const AddExperience = ({ addExperience, history }) => {
+const AddExperience = ({addExperience, history}) => {
   const [formData, setFormData] = useState({
     company: '',
     title: '',
@@ -14,19 +14,19 @@ const AddExperience = ({ addExperience, history }) => {
     current: false,
     description: ''
   });
-
+  
   const [toDateDisabled, toggleDisabled] = useState(false);
-
-  const { company, title, location, from, to, current, description } = formData;
-
+  
+  const {company, title, location, from, to, current, description} = formData;
+  
   const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
+    setFormData({...formData, [e.target.name]: e.target.value});
+  
   return (
     <Fragment>
       <h1 className='large text-primary'>Add An Experience</h1>
       <p className='lead'>
-        <i className='fas fa-code-branch' /> Add any working experience
+        <i className='fas fa-code-branch'/> Add any working experience
         that you have had in the past
       </p>
       <small>* = required field</small>
@@ -83,7 +83,7 @@ const AddExperience = ({ addExperience, history }) => {
               checked={current}
               value={current}
               onChange={() => {
-                setFormData({ ...formData, current: !current });
+                setFormData({...formData, current: !current});
                 toggleDisabled(!toDateDisabled);
               }}
             />{' '}
@@ -110,7 +110,7 @@ const AddExperience = ({ addExperience, history }) => {
             onChange={e => onChange(e)}
           />
         </div>
-        <input type='submit' className='btn btn-primary my-1' />
+        <input type='submit' className='btn btn-primary my-1'/>
         <Link className='btn btn-light my-1' to='/dashboard'>
           Go Back
         </Link>
@@ -125,5 +125,5 @@ AddExperience.propTypes = {
 
 export default connect(
   null,
-  { addExperience }
+  {addExperience}
 )(withRouter(AddExperience));

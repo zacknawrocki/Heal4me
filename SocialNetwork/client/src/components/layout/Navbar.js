@@ -1,49 +1,49 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, {Fragment} from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { logout } from '../../actions/auth';
+import {logout} from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({auth: {isAuthenticated, loading}, logout}) => {
   const authLinks = (
     <ul>
-       <li>
+      <li>
         <Link to='/home'>
           Home
         </Link>
       </li>
       
-       <li>
+      <li>
         <Link to='/profiles'>
           Users
         </Link>
       </li>
-        <li>
-            <Link to='/contact'>
-                Contacts
-            </Link>
-        </li>
+      <li>
+        <Link to='/contact'>
+          Contacts
+        </Link>
+      </li>
       <li>
         <Link to='/posts'>
           Posts
         </Link>
       </li>
-     
+      
       <li>
         <Link to='/dashboard'>
-          <i className='fas fa-user' />{' '}
+          <i className='fas fa-user'/>{' '}
           <span className='hide-sm'>Settings</span>
         </Link>
       </li>
       <li>
         <a onClick={logout} href='#!'>
-          <i className='fas fa-sign-out-alt' />{' '}
+          <i className='fas fa-sign-out-alt'/>{' '}
           <span className='hide-sm'>Logout</span>
         </a>
       </li>
     </ul>
   );
-
+  
   const guestLinks = (
     <ul>
       <li>
@@ -82,5 +82,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logout }
+  {logout}
 )(Navbar);

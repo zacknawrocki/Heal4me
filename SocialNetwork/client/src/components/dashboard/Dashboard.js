@@ -1,40 +1,52 @@
-import React, { Fragment, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Fragment, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
-import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import {Form, Input, Upload, Button, PageHeader, message} from "antd";
+import {deleteAccount, getCurrentProfile} from '../../actions/profile';
+import {SettingOutlined,UserOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
+
 
 const Dashboard = ({
-  getCurrentProfile,
-  deleteAccount,
-  auth: { user },
-  profile: { profile, loading }
-}) => {
+                     getCurrentProfile,
+                     deleteAccount,
+                     auth: {user},
+                     profile: {profile, loading}
+                   }) => {
+  
   useEffect(() => {
-    getCurrentProfile();
+    getCurrentProfile().then(res=>{
+    
+    });
   }, [getCurrentProfile]);
-
+  
   return loading && profile === null ? (
-    <Spinner />
+    <Spinner/>
   ) : (
     <Fragment>
-      <h1 className='large text-primary'>User Settings</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Welcome {user && user.name}
-      </p>
-      {profile !== null && profile !== undefined? (
+      <PageHeader
+        ghost={false}
+        title={
+           <div><SettingOutlined />User Settings</div>
+        }
+        subTitle={
+          <span>  Welcome {user && user.name}</span>
+        }
+      >
+      </PageHeader>
+      {profile !== null && profile !== undefined ? (
         <Fragment>
-          <DashboardActions />
-          <Experience experience={profile.experience} />
-          <Education education={profile.education} />
-
+          <DashboardActions/>
+          <Experience experience={profile.experience}/>
+          <Education education={profile.education}/>
+          
           <div className='my-2'>
             <button className='btn btn-danger' onClick={() => deleteAccount()}>
-              <i className='fas fa-user-minus' /> Delete My Account
+              <i className='fas fa-user-minus'/> Delete My Account
             </button>
           </div>
         </Fragment>
@@ -64,5 +76,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, deleteAccount }
+  {getCurrentProfile, deleteAccount}
 )(Dashboard);
