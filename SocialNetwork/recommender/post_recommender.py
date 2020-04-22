@@ -1,6 +1,8 @@
 import sys
 import json
 import pandas as pd
+import random
+import functools
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -69,11 +71,18 @@ if __name__ == "__main__":
     # that have been viewed within the last X days
     cosine_sim = cosine_similarity(count_matrix)
     similar_posts = list(enumerate(cosine_sim[pr_data_len - 1]))
-    sorted_similar_posts = sorted(similar_posts, key=lambda x: x[1], reverse=True)
-    sorted_similar_posts_ids = []
+    similar_posts_ids = []
 
-    for post in sorted_similar_posts:
-        # print(get_text_from_index(post[0]))
-        if post[0] != pr_data_len - 1 and post[1] != 0:
-            sorted_similar_posts_ids.append({"_id": get_id_from_index(post[0])})
-    print(json.dumps(sorted_similar_posts_ids))
+    # Allow up to 5 irrelevant posts to be displayed
+    irrelevant_posts_allowed = 5
+
+    # Calculate the number of similar and non-similar posts
+    num_zero_sim = len([x for x in similar_posts if x[1] == 0])
+    num_sim = len(similar_posts_ids) - num_zero_sim
+
+    for post in similar_posts:
+        # If the number of similar posts is less than 5, allow up to 5 irrelevant posts
+        if post[0] != pr_data_len - 1 and (post[1] != 0 or num_sim < 5 and irrelevant_posts_allowed):
+            similar_posts_ids.append({"_id": get_id_from_index(post[0])})
+            irrelevant_posts_allowed -= 1
+    print(json.dumps((similar_posts_ids)))

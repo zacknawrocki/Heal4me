@@ -30,8 +30,8 @@ const Home = (props) => {
           <MyPosts />
         </TabPane>
         <TabPane tab="News Feed" key="NewsFeed">
-           <PsychologicalCounseling />
            <Recommendation />
+           <PsychologicalCounseling />
         </TabPane>
       </Tabs>
     </Fragment>
