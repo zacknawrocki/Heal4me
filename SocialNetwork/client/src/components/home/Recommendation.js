@@ -37,9 +37,9 @@ const Recommendation = ({getRecommendation, recommendation: {recommendation}}) =
     setRefresh('recommendation')
   
     getImages().then(()=>{
-      message.success('refresh Recommendation success')
+      message.success('Recommendation refreshed successfully!')
     }).catch(()=>{
-      message.error('refresh Recommendation failed')
+      message.error('Recommendation refresh failed!')
     }).finally(()=>{
       setRefresh('')
     });
@@ -47,9 +47,9 @@ const Recommendation = ({getRecommendation, recommendation: {recommendation}}) =
   const refreshSimiliar = ()=>{
     setRefresh('similiar')
     getImages().then(()=>{
-      message.success('refresh Similiar posts success')
+      message.success('Similiar posts refreshed successfully!')
     }).catch(()=>{
-      message.error('refresh Similiar posts failed')
+      message.error('Refresh failed!')
     }).finally(()=>{
       setRefresh('')
     })
