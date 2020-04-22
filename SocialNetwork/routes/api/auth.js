@@ -18,7 +18,6 @@ router.get('/', auth, async (req, res) => {
     } catch(err) {
         console.error(err.message);
         res.status(500).send('Server error');
-
     }
 });
 
@@ -53,7 +52,6 @@ async (req, res) => {
         }
 
          // Return jsonwebtoken
-    
         const payload = {
             user: {
                 id: user.id

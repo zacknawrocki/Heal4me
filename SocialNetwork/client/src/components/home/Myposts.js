@@ -20,6 +20,10 @@ const MyPosts = ({getMyPosts, myposts, loading}) => {
       {
         loading? (<Spin />) :(
           myposts&& myposts.length > 0 ? myposts.map(post => {
+            const wordArr = post.text.split(' ');
+            if (wordArr.length > 50) {
+                post.text = wordArr.splice(0, 50).join(' ') + " ...";
+            }
             return <PostItem key={post._id} post={post} isHome={true}/>
           })
           : <span>You don't have a post yet, do you want to <Link to="/posts">create one</Link>?</span>
