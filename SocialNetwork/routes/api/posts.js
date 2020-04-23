@@ -7,6 +7,8 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 
+const anonID = '5ea19d468e390b6b8b7eedef';
+
 // @desc   Helper function for finding an object with a property containing the given value
 function findPropertyInArrayOfObjects(arr, propName, value) {
     let i = 0;
@@ -39,7 +41,6 @@ async(req, res) => {
     }
 
     try {
-        const anonID = '5ea19d468e390b6b8b7eedef';
         const userid = req.user !== undefined ? req.user.id : anonID;
         const user = await User.findById(userid).select('-password');
 
@@ -78,7 +79,7 @@ router.get('/', async(req, res) => {
 // @route  GET api/posts/:id
 // @desc   Get post by ID
 // @access Private
-router.get('/:id', auth, async(req, res) => {
+router.get('/:id', async(req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 
@@ -86,25 +87,25 @@ router.get('/:id', auth, async(req, res) => {
             return res.status(404).json({ msg: 'Post not found'});
         }
 
-        const user = await User.findById(req.user.id);
+        const userid = req.user !== undefined ? req.user.id : anonID;
+        const user = await User.findById(userid).select('-password');
 
-        // delete data
-        // user.recently_viewed = []
-        // await user.save();
-        let postPos = findPropertyInArrayOfObjects(user.recently_viewed, "post", post.id);
-        
-        if (postPos >= 0) {
-            user.recently_viewed.splice(postPos, 1);
-            user.recently_viewed.unshift({ post: post.id });
-        } else {
-            user.recently_viewed.unshift({ post: post.id });
-        }
+        if (userid !== anonID) {
+            let postPos = findPropertyInArrayOfObjects(user.recently_viewed, "post", post.id);
+            
+            if (postPos >= 0) {
+                user.recently_viewed.splice(postPos, 1);
+                user.recently_viewed.unshift({ post: post.id });
+            } else {
+                user.recently_viewed.unshift({ post: post.id });
+            }
+    
+            if (user.recently_viewed.length > 10) {
+                user.recently_viewed.pop();
+            }
 
-        if (user.recently_viewed.length > 10) {
-            user.recently_viewed.pop();
+            await user.save();
         }
-        
-        await user.save();
 
         res.json(post);
         
