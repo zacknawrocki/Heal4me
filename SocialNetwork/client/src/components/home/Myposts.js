@@ -18,7 +18,7 @@ const MyPosts = ({getMyPosts, myposts, loading}) => {
   return (
     <Fragment>
       {
-        loading? (<Spin />) :(
+        !myposts || myposts === undefined || loading? (<Spin />) :(
           myposts&& myposts.length > 0 ? myposts.map(post => {
             const wordArr = post.text.split(' ');
             if (wordArr.length > 50) {
