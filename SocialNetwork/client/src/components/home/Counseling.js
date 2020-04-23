@@ -43,7 +43,6 @@ const PsychologicalCounseling = (props) => {
               <img src="./Counseling2.gif" onClick={()=>goTo(2)} height={60}/>
               <img src="./Counseling3.png" onClick={()=>goTo(3)} height={60}/>
             </div>
-            {/*<h1>{grade}</h1>*/}
           </div>
         ) : null
       }

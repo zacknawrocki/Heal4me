@@ -1,13 +1,18 @@
 import sys
 import os
 import warnings
+import pickle
 warnings.filterwarnings('ignore') 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import RandomizedSearchCV
 from keras import layers
 from keras.models import Sequential
+from keras.wrappers.scikit_learn import KerasClassifier
+from keras.preprocessing.text import Tokenizer
+from keras.preprocessing.sequence import pad_sequences
 import tensorflow as tf 
 import nltk
 import csv
@@ -29,6 +34,19 @@ def buildDataset(filename):
             dataset.append( {"text": row[1], "label": row[2]} )    
     return dataset
 
+# Create the convolutional model
+def create_model(num_filters, kernel_size, vocab_size, embedding_dim, maxlen):
+    model = Sequential()
+    model.add(layers.Embedding(vocab_size, embedding_dim, input_length=maxlen))
+    model.add(layers.Conv1D(num_filters, kernel_size, activation='relu'))
+    model.add(layers.GlobalMaxPooling1D())
+    model.add(layers.Dense(10, activation='relu'))
+    model.add(layers.Dense(1, activation='sigmoid'))
+    model.compile(optimizer='adam',
+                  loss='binary_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
 if __name__ == '__main__':
     if len(sys.argv) <= 1:
         print("ERROR: missing args")
@@ -41,66 +59,45 @@ if __name__ == '__main__':
     postProcessor = PreProcessPosts()
     X, y = postProcessor.processPosts(dataset)
 
-    # Divide the processed data into training and testing sets
+    # Main settings
+    epochs = 20
+    embedding_dim = 50
+    maxlen = 100
+    output_file = 'data/output.txt'
+
+    # Train-test split
     posts_train, posts_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.25, random_state=1000)
+        X, y, test_size=0.25, random_state=1000)
 
-    # Initialize and fit a CountVectorizer
-    vectorizer = CountVectorizer()
-    vectorizer.fit(posts_train)
+    # Tokenize words
+    tokenizer = Tokenizer(num_words=5000)
+    tokenizer.fit_on_texts(posts_train)
+    X_train = tokenizer.texts_to_sequences(posts_train)
+    X_test = tokenizer.texts_to_sequences(posts_test)
 
-    X_train = vectorizer.transform(posts_train)
-    X_test  = vectorizer.transform(posts_test)
+    # Adding 1 because of reserved 0 index
+    vocab_size = len(tokenizer.word_index) + 1
 
-    # Enter test sentences here.
-    X_real_data = [
-        "I want to kill myself. I'm tired of being alive. Today's my last day on earth. i repeatedly cut myself",
-        "I have a happy life. I'm rich, I have a huge mansion, and a loving wife..",
-        "Today, I went to school and I got bullied. They made fun of me and now I feel sad.",
-        "I have a gun. I just bought it at the cornerstore. They don't think I have it in me, but I'll show them.",
-        "I just got a promotion in my job; now im the boss. It's nice being at the top. I had a delicious cake to celebrate.]",
-        "Today it was dark outside, just like I am on the inside. I was listening to some music and i had a thought: what if the world ended",
-        "Ever since I won the lottery, life has been so easy, I've got money and everyone's my friend",
-        "I just got married, and I already have a beautiful baby on the way. I've never been happier in my life!!"
-    ]
+    # Pad sequences with zeros
+    X_train = pad_sequences(X_train, padding='post', maxlen=maxlen)
+    X_test = pad_sequences(X_test, padding='post', maxlen=maxlen)
 
-    X_real_data = vectorizer.transform(X_real_data)
-
-    input_dim = X_train.shape[1]  # Number of features
-
-    # Use a Sequential model, which enables the use of Keras layers
-    model = Sequential()
-
-    # Add Dense layers, which use weights and biases
-    model.add(layers.Dense(10, input_dim=input_dim, activation='relu'))
-    model.add(layers.Dense(1, activation='sigmoid'))
-
-    # Configure the learning process, specifying the optimizer and loss functions
-    model.compile(loss='binary_crossentropy', 
-        optimizer='adam', 
-        metrics=['accuracy'])    
-    
-    # View the model's summary information
-    # NODE 1:
-    # Have 11761 dimensions; need weights/dim and each node
-    # 11761 * 10 nodes + 10 biases/node = 11760 Params
-    # NODE 2:
-    # 1 Node * (10 weights/node + 1 bias/node)
-    # print(model.summary())
-
-    # Train the model. Epochs=iterations, batch size=number of samples/epoch
-    # Larger batch size increases the speed of the computation (less epochs)
-    # but requires more memory; may degrade the model
+    # Create model
+    model = create_model(64, 5, vocab_size, embedding_dim, maxlen)
     history = model.fit(X_train, y_train,
-        epochs=40,
-        verbose=False,
-        validation_data=(X_test, y_test),
-        batch_size=10)
-
-    # Measure the model's accuracy
+                        epochs=30,
+                        verbose=False,
+                        validation_data=(X_test, y_test),
+                        batch_size=10)
+    
+    # Evaluate testing set
     loss, accuracy = model.evaluate(X_train, y_train, verbose=False)
     print("Training Accuracy: {:.4f}".format(accuracy))
     loss, accuracy = model.evaluate(X_test, y_test, verbose=False)
     print("Testing Accuracy:  {:.4f}".format(accuracy))
 
-    print(model.predict(X_real_data))
+    # Export classifier/tokenizer
+    with open('classifier.pkl', 'wb') as f:
+        pickle.dump(model, f)
+    with open('tokenizer.pkl', 'wb') as f:
+        pickle.dump(tokenizer, f)

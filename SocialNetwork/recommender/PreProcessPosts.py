@@ -21,7 +21,7 @@ class PreProcessPosts:
         post = re.sub(r"\s+[a-zA-Z]\s+", ' ', post) # Single character removal
         post = re.sub(r'\s+', ' ', post) # Removing multiple spaces
         post = ' '.join(self.normalize(list(post.split(' '))))
-        return post
+        return post.strip()
 
         # Convert to base words
     def normalize(self, post_tokens):

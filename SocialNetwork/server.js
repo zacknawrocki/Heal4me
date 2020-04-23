@@ -1,7 +1,18 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const app = express();
+const fs = require('fs')
 require('./socket/io');
+
+const modelPath = './recommender/m.pkl';
+
+try {
+  if (fs.existsSync(modelPath)) {
+    console.log("Exists");
+  }
+} catch(err) {
+    console.error(err)
+}
 
 // Connect Database
 connectDB();
