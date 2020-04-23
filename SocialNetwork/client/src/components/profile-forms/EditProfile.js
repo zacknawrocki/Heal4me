@@ -109,6 +109,7 @@ const EditProfile = ({
           >
             <Option value='0'>* Select your occupation</Option>
             <Option value='Teacher'>Teacher</Option>
+            <Option value='Teacher'>Student</Option>
             <Option value='Mechanic'>Mechanic</Option>
             <Option value='Artist'>Artist</Option>
             <Option value='administrator'>Administrator</Option>
@@ -141,8 +142,8 @@ const EditProfile = ({
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }>
             <Option value='0'>Gender</Option>
-            <Option value='Man'>Man</Option>
-            <Option value='Woman'>Woman</Option>
+            <Option value='Man'>Male</Option>
+            <Option value='Woman'>Female</Option>
             <Option value='Genderqueer'>Genderqueer/Non-Binary</Option>
             <Option value='Unknown'>Prefer not to disclose</Option>
           </Select>

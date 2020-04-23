@@ -35,9 +35,9 @@ const Recommendation = ({getRecommendation, recommendation: {recommendation}}) =
   const fetchSimiliar = ()=>{
     setRefresh('similiar')
     getRecommendation().then(()=>{
-      message.success('fetch Similiar posts successfully!')
+      message.success('Similiar posts fetched successfully!')
     }).catch(()=>{
-      message.error('fetch Similiar posts failed!')
+      message.error('Similiar posts fetched failed!')
     }).finally(()=>{
       setLoadingRec(false);
       setRefresh('')

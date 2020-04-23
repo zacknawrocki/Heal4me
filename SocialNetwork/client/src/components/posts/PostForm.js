@@ -48,12 +48,9 @@ const PostForm = ({addPost}) => {
         }
       </div>
       <Alert message="Share your moments with us..." type="info" showIcon />
-      {/*<div className='bg-primary p'>*/}
-      {/*  <h3 style={{color: '#fff'}}>Share your moments with us...</h3>*/}
-      {/*</div>*/}
       <Form className="form my-1" onFinish={handleAddPost}>
         <FormItem rules={[{required: true, message: 'Please input your post!'}]}>
-          <Input.TextArea placeholder='happy to post' value={text}
+          <Input.TextArea placeholder='Please leave your post' value={text}
                           autoSize={{minRows: 3, maxRows: 6}}
                           onChange={event => setText(event.target.value)}/>
         </FormItem>
@@ -63,24 +60,6 @@ const PostForm = ({addPost}) => {
           </Button>
         </Form.Item>
       </Form>
-      {/*<form*/}
-      {/*  className='form my-1'*/}
-      {/*  onSubmit={e => {*/}
-      {/*    e.preventDefault();*/}
-      {/*    */}
-      {/*  }}*/}
-      {/*>*/}
-      {/*      <textarea*/}
-      {/*        name='text'*/}
-      {/*        cols='30'*/}
-      {/*        rows='5'*/}
-      {/*        placeholder='Create a post'*/}
-      {/*        value={text}*/}
-      {/*        onChange={e => setText(e.target.value)}*/}
-      {/*        required*/}
-      {/*      />*/}
-      {/*  <input type='submit' className='btn btn-dark my-1' value='Submit'/>*/}
-      {/*</form>*/}
     </div>
   );
 };
