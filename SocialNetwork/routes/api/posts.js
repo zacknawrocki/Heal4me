@@ -6,6 +6,7 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
+const mongoose = require('mongoose');
 
 const config = require('config');
 const anonID = config.get('anonID');
@@ -80,7 +81,7 @@ router.get('/', auth, async(req, res) => {
 // @route  GET api/posts/:id
 // @desc   Get post by ID
 // @access Private
-router.get('/:id', async(req, res) => {
+router.get('/:id', auth, async(req, res) => {
     try {
         const post = await Post.findById(req.params.id);
 
@@ -214,7 +215,8 @@ async(req, res) => {
         return res.status(400).json({ errors: errors.array()});
     }
     try {
-        const user = await User.findById(req.user.id).select('-password');
+        const userid = req.user !== undefined ? req.user.id : anonID;
+        const user = await User.findById(userid).select('-password');
 
         const post = await Post.findById(req.params.id);
 
@@ -222,7 +224,7 @@ async(req, res) => {
             text: req.body.text,
             name: user.name,
             avatar: user.avatar,
-            user: req.user.id
+            user: userid
         };
 
         post.comments.unshift(newComment);

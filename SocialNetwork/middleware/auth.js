@@ -6,9 +6,7 @@ module.exports = function(req, res, next) {
      // Get token from header
      const token = req.header('x-auth-token');
 
-    console.log(req);
-    if (req.baseUrl === "/api/posts" && !token) {
-        console.log("K");
+    if ((req.baseUrl === "/api/posts") && !token) {
         next();
     }
     else if(!token) {

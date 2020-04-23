@@ -102,6 +102,7 @@ export const addPost = formData => async dispatch => {
 
 // Get post
 export const getPost = id => async dispatch => {
+  console.log(id);
   try {
     const res = await service.get(`/api/posts/${id}`);
     
