@@ -6,11 +6,8 @@ warnings.filterwarnings('ignore')
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 from sklearn.model_selection import train_test_split
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import RandomizedSearchCV
 from keras import layers
 from keras.models import Sequential
-from keras.wrappers.scikit_learn import KerasClassifier
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 import tensorflow as tf 
