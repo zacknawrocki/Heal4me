@@ -50,6 +50,11 @@ const Navbar = ({auth: {isAuthenticated}, logout}) => {
         <Link to='/profiles'>Users</Link>
       </li>
       <li>
+        <Link to='/posts'>
+          Posts
+        </Link>
+      </li>
+      <li>
         <Link to='/register'>Register</Link>
       </li>
       <li>

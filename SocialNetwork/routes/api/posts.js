@@ -20,10 +20,10 @@ function findPropertyInArrayOfObjects(arr, propName, value) {
 router.get('/my', [auth, [
     check('text', 'Text is required').not().isEmpty()
 ]],
-async(req, res) => {
-  const data = await Post.find({user: req.user.id})
-  res.json(data)
-}
+    async(req, res) => {
+    const data = await Post.find({user: req.user.id})
+    res.json(data)
+    }
 )
 
 // @route  POST api/posts
@@ -63,7 +63,7 @@ async(req, res) => {
 // @route  GET api/posts
 // @desc   Get all posts
 // @access Public
-router.get('/', auth, async(req, res) => {
+router.get('/', async(req, res) => {
     try {
         const posts = await Post.find().sort({ date: -1 });
         res.json(posts);
@@ -71,9 +71,8 @@ router.get('/', auth, async(req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
-}
-}
-);
+    }
+});
 
 // @route  GET api/posts/:id
 // @desc   Get post by ID

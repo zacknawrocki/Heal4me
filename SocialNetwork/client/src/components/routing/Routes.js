@@ -24,7 +24,7 @@ export const Routes = () => {
       <Switch>
         <Route exact path="/register" component={Register}/>
         <Route exact path="/login" component={Login}/>
-        <PrivateRoute exact path="/posts" component={Posts}/>
+        <Route exact path="/posts" component={Posts}/>
         <PrivateRoute exact path='/dashboard' component={Dashboard}/>
         <PrivateRoute exact path='/home' component={Home}/>
         <PrivateRoute exact path='/contact' component={Contact}/>
@@ -32,7 +32,7 @@ export const Routes = () => {
         <PrivateRoute exact path='/edit-profile' component={EditProfile}/>
         <PrivateRoute exact path='/add-experience' component={AddExperience}/>
         <PrivateRoute exact path='/add-education' component={AddEducation}/>
-        <PrivateRoute exact path='/posts/:id' component={Post}/>
+        <Route exact path='/posts/:id' component={Post}/>
         <Route exact path='/profiles' component={Profiles}/>
         <Route exact path='/profile/:id' component={Profile}/>
         <Route component={NotFound}/>
