@@ -18,9 +18,7 @@ const PostItem = ({
                     post: {_id, text, name, avatar, user, likes, comments, date},
                     showActions,
                   }) => {
-  // console.log(auth.user, _id);
-  // const [likes, setLikes] = useState(false);
-  // const [dislikes, setDislikes] = useState(0);
+                    
   const [action, setAction] = useState(null);
   const [hadLike, sethadLike] = useState(false);
   

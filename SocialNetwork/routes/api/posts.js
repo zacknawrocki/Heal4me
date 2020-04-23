@@ -29,9 +29,9 @@ router.get('/my', [auth, [
 // @route  POST api/posts
 // @desc   Create a post
 // @access Private
-router.post('/', [ auth, [
+router.post('/', [
     check('text', 'Text is required').not().isEmpty()
-]],
+],
 async(req, res) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
@@ -39,19 +39,20 @@ async(req, res) => {
     }
 
     try {
-        const user = await User.findById(req.user.id).select('-password');
+        const anonID = '5ea19d468e390b6b8b7eedef';
+        const userid = req.user !== undefined ? req.user.id : anonID;
+        const user = await User.findById(userid).select('-password');
 
         const newPost = new Post({
             text: req.body.text,
             name: user.name,
             avatar: user.avatar,
-            user: req.user.id
+            user: userid
         });
         
+        const post = await newPost.save();
 
-    const post = await newPost.save();
-
-    res.json(post);
+        res.json(post);
 
     } catch (err) {
         console.error(err.message);
