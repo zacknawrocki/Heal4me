@@ -46,31 +46,12 @@ router.get('/', auth, async(req, res) => {
         results.push(result)
       }
     }
-    console.log(results);
     // const posts = await Post.find().sort({ date: -1 });
     res.json(results);
     
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
-    }
-  }
-);
-
-router.get('/images/grade', auth, async(req, res) => {
-    console.log(req.query);
-    try {
-      
-      res.json({
-        grade: 80
-      });
-      
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send({
-        msg: err.message,
-        code: 500
-      });
     }
   }
 );
