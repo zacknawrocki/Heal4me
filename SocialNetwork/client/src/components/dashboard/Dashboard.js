@@ -51,7 +51,7 @@ const Dashboard = ({
       </PageHeader>
       <div className="settings-content">
         {
-          profile ?(
+          profile !== undefined && profile !== null ?(
             <Fragment>
               <Tabs type="card">
                 <TabPane tab="Profile" key="Profile">

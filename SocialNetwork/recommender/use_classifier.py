@@ -17,9 +17,12 @@ if __name__ == "__main__":
 
     post_dict = json.loads(sys.argv[1])
     post_list = []
-
+    
     for item in post_dict:
         post_list.append(item['text'])
+
+    if len(post_list) == 0:
+        sys.exit(0)
 
     # X_real_data = [
     #     "I want to kill myself. I'm tired of being alive. Today's my last day on earth. i repeatedly cut myself",
