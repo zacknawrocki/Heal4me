@@ -14,8 +14,8 @@ export const getRecommendation = () => async dispatch => {
   }
 };
 
-export const getImages = () => {
-  return service.get('/api/images')
+export const getImages = ({offset}) => {
+  return service.get('/api/images?offset='+ offset)
 }
 
 export const getGrade = () => {

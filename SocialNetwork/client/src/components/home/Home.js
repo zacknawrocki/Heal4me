@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import Recommendation from './Recommendation'
 import PsychologicalCounseling from './Counseling'
+import OtherResources from './OtherResources'
 import MyPosts from './Myposts'
 import {Tabs, } from "antd";
 const { TabPane } = Tabs;
@@ -25,15 +26,20 @@ const Home = (props) => {
   
   return (
     <Fragment>
-      <Tabs defaultActiveKey={defaultTab} activeKey={defaultTab} type="card" onTabClick={onTabClick}>
-        <TabPane tab="My Posts" key="MyPosts">
-          <MyPosts />
-        </TabPane>
-        <TabPane tab="News Feed" key="NewsFeed">
-           <Recommendation />
-           <PsychologicalCounseling />
-        </TabPane>
-      </Tabs>
+      <div className="home">
+        <Tabs defaultActiveKey={defaultTab} activeKey={defaultTab} type="card" onTabClick={onTabClick}>
+          <TabPane tab="My Posts" key="MyPosts">
+            <MyPosts />
+          </TabPane>
+          <TabPane tab="News Feed" key="NewsFeed">
+            <Recommendation />
+            <PsychologicalCounseling />
+          </TabPane>
+          <TabPane tab="Other Resources" key="Other Resources">
+            <OtherResources />
+          </TabPane>
+        </Tabs>
+      </div>
     </Fragment>
   );
 };

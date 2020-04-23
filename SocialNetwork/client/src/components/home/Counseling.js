@@ -6,7 +6,7 @@ import {Alert, Spin, message} from "antd";
 import {getGrade} from "../../actions/home";
 
 const PsychologicalCounseling = (props) => {
-  const [grade, setGrade] = useState(10);
+  const [grade, setGrade] = useState(100);
 
   useEffect(() => {
     getGrade().then(res=>{
@@ -31,7 +31,7 @@ const PsychologicalCounseling = (props) => {
   return (
     <div>
       {
-        grade>7? (
+        grade<5? (
           <div className="footer">
             <Alert message={
               <div>
@@ -43,6 +43,7 @@ const PsychologicalCounseling = (props) => {
               <img src="./Counseling2.gif" onClick={()=>goTo(2)} height={60}/>
               <img src="./Counseling3.png" onClick={()=>goTo(3)} height={60}/>
             </div>
+            {/*<h1>{grade}</h1>*/}
           </div>
         ) : null
       }

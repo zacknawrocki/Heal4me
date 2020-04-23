@@ -29,7 +29,9 @@ const Register = ({history, setAlert, register, isAuthenticated}) => {
           <span><UserOutlined /> Create Your Account</span>
         }
       >
-        <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} form={form}
+      </PageHeader>
+  
+      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} form={form}
               name="control-hooks" onFinish={onSubmit} scrollToFirstError>
           <Form.Item name="name" label="Name" rules={[{ required: true }]}>
             <Input placeholder="Name" prefix={<UserOutlined />} />
@@ -96,9 +98,7 @@ const Register = ({history, setAlert, register, isAuthenticated}) => {
             </p>
           </Form.Item>
         </Form>
-       
-      </PageHeader>
-    </Fragment>
+      </Fragment>
   );
 };
 

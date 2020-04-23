@@ -43,13 +43,10 @@ const Login = ({login, isAuthenticated, history}) => {
   };
   
   return (
-    <Fragment>
+    <div className="login-content">
       <h1 className='large text-primary'>Sign In</h1>
-      <p className='lead'>
-        <i className='fas fa-user'/> Sign Into Your Account
-      </p>
       
-      <Form onFinish={onSubmit} onFinishFailed={onFinishFailed}>
+      <Form onFinish={onSubmit} onFinishFailed={onFinishFailed} style={{width: 500}}>
         <FormItem label="Username"
                   name="username"
                   rules={[{required: true, message: 'Please input your username!'}]}>
@@ -66,7 +63,7 @@ const Login = ({login, isAuthenticated, history}) => {
                           name="password" onChange={e => onChange(e)}/>
         </FormItem>
         <Form.Item>
-          <Button type="primary" htmlType="submit" loading={loading}>
+          <Button type="primary" htmlType="submit" loading={loading} style={{width: '100%'}}>
             Login
           </Button>
         </Form.Item>
@@ -98,7 +95,7 @@ const Login = ({login, isAuthenticated, history}) => {
       <p className='my-1'>
         Don't have an account? <Link to='/register'>Sign Up</Link>
       </p>
-    </Fragment>
+    </div>
   );
 };
 

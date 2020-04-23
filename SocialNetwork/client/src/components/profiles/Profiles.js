@@ -44,7 +44,7 @@ const Profiles = ({ getProfiles }) => {
       {
         loading ? (<Spin />) : (
           <div className='profiles'>
-            {profiles.length > 0 ? (
+            {profiles?.length > 0 ? (
               profiles.map(profile => {
                 if (profile.bio) {
                   const wordArr = profile.bio.split(' ');

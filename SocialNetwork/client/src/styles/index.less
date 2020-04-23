@@ -8,7 +8,6 @@
 .gallery{
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   .ant-alert{
     font-weight: bold;
     width: 160px;
@@ -17,7 +16,7 @@
   img{
     width: auto;
     height: auto;
-    max-width: 200px;
+    max-width: 300px;
     cursor: pointer;
     &:hover{
       transform: scale(1.2);
@@ -26,13 +25,14 @@
     }
   }
   .gallery-content{
-    width: 612px;
+    //width: 612px;
     >.react-photo-gallery--gallery>div{
-      justify-content: flex-end;
+      //justify-content: flex-end;
     }
   }
   .recommendation{
-    flex-grow: 1;
+    //flex-grow: 1;
+    width: 748px;
   }
 }
 
@@ -45,20 +45,26 @@
 }
 
 .recommendation{
-  
+
+}
+.large.text-primary{
+  margin-top: 10px;
 }
 
 
 
 .refresh{
-  transform: translate(180px, -45px);
+  //transform: translate(180px, -45px);
   font-size: 24px;
   color: #52c41a;
 }
-.ant-tabs-bar{
-  position: fixed;
-  z-index: 3000;
-  background: #fff;
+.home{
+  .ant-tabs-bar{
+    position: fixed;
+    z-index: 777;
+    background: #fff;
+    width: 100%;
+  }
 }
 
 .ant-tabs .ant-tabs-top-content, .ant-tabs .ant-tabs-bottom-content{
@@ -122,6 +128,55 @@
     }
   }
 }
+
+
+.nav-avatar{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  vertical-align: text-bottom;
+  margin-right: 20px;
+
+}
+.nav-user{
+  color: #fff;
+  font-size: 16px;
+  height: 24px;
+  margin-left: 50px;
+  line-height: 24px;
+}
+
+.flex-center{
+  display: flex;
+  align-items: center;
+}
+
+.login-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+.settings-content{
+  .ant-tabs .ant-tabs-top-content, .ant-tabs .ant-tabs-bottom-content{
+    margin-top: 10px;
+  }
+  .ant-collapse{
+    width: 75%;
+    .ant-form-item-label{
+      width: 90px;
+    }
+  }
+  small{
+    margin-left: 122px;
+    color: blueviolet;
+  }
+}
+
+.ant-descriptions-title{
+  margin-bottom: 0px;
+}
+
 
 #modal .modal-content {
   height: auto;
