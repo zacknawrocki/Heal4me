@@ -1,15 +1,21 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
-import Experience from './Experience';
-import Education from './Education';
-import {Form, Input, Upload, Button, PageHeader, message} from "antd";
+import AddExperience from '../profile-forms/AddExperience';
+import AddEducation from '../profile-forms/AddEducation';
+import {Form, Input, Upload, Button, PageHeader, message, Tabs, Popconfirm, Alert} from "antd";
 import {deleteAccount, getCurrentProfile} from '../../actions/profile';
-import {SettingOutlined,UserOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
+import {SettingOutlined,DeleteOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
+import MyPosts from "../home/Myposts";
+import Recommendation from "../home/Recommendation";
+import PsychologicalCounseling from "../home/Counseling";
+import EditProfile from "../profile-forms/EditProfile";
+import Profile from "../profile/Profile";
 
+const TabPane = Tabs.TabPane
 
 const Dashboard = ({
                      getCurrentProfile,
@@ -18,13 +24,21 @@ const Dashboard = ({
                      profile: {profile, loading}
                    }) => {
   
+  const [defaultTab, setDefaultTab] = useState('MyPosts');
+  
+  const handleDeleteAccount = ()=>{
+    deleteAccount().then(res=>{
+    
+    })
+  }
+  
   useEffect(() => {
     getCurrentProfile().then(res=>{
     
     });
   }, [getCurrentProfile]);
   
-  return loading && profile === null ? (
+  return loading && !profile ? (
     <Spinner/>
   ) : (
     <Fragment>
@@ -33,31 +47,51 @@ const Dashboard = ({
         title={
            <div><SettingOutlined />User Settings</div>
         }
-        subTitle={
-          <span>  Welcome {user && user.name}</span>
-        }
       >
       </PageHeader>
-      {profile !== null && profile !== undefined ? (
-        <Fragment>
-          <DashboardActions/>
-          <Experience experience={profile.experience}/>
-          <Education education={profile.education}/>
-          
-          <div className='my-2'>
-            <button className='btn btn-danger' onClick={() => deleteAccount()}>
-              <i className='fas fa-user-minus'/> Delete My Account
-            </button>
-          </div>
-        </Fragment>
-      ) : (
-        <Fragment>
-          <p>You have not yet setup a profile, please add some info</p>
-          <Link to='/create-profile' className='btn btn-primary my-1'>
-            Create Profile
-          </Link>
-        </Fragment>
-      )}
+      <div className="settings-content">
+        {
+          profile ?(
+            <Fragment>
+              <Tabs type="card">
+                <TabPane tab="Profile" key="Profile">
+                  <Profile />
+                </TabPane>
+                <TabPane tab="Edit Profile" key="EditProfile">
+                  <EditProfile />
+                </TabPane>
+                <TabPane tab="Add Experience" key="AddExperience">
+                  <AddExperience experience={profile.experience}/>
+                </TabPane>
+                <TabPane tab="Add Education" key="AddEducation">
+                  <AddEducation education={profile.education}/>
+                </TabPane>
+              </Tabs>
+              {/*<DashboardActions/>*/}
+              <Popconfirm
+                title="Are you sure delete your account?"
+                onConfirm={handleDeleteAccount}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button type="danger" icon={<DeleteOutlined />}>Delete My Account</Button>
+              </Popconfirm>
+              
+              {/*<div className='my-2'>*/}
+              {/*  <button className='btn btn-danger' onClick={() => deleteAccount()}>*/}
+              {/*    <i className='fas fa-user-minus'/> */}
+              {/*  </button>*/}
+              {/*</div>*/}
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Alert message="You have not yet setup a profile, please add some info" />
+              <Link to='/edit-profile?type=edit'>
+                <Button type="success">Create Profile</Button>
+              </Link>
+            </Fragment>
+          )}
+      </div>
     </Fragment>
   );
 };

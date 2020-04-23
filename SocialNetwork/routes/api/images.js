@@ -13,12 +13,20 @@ const auth = require('../../middleware/auth');
 
 router.get('/', auth, async(req, res) => {
   console.log(req.query);
+  const offset = req.query.offset
   try {
     const profile = await Profile.findOne({
       user: req.user.id
     }).populate('user', ['name', 'avatar']);
   
-    // const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+    let hobbies = []
+    if (profile && profile.hobbies) {
+      hobbies = profile.hobbies
+    } else {
+      hobbies = ['love', 'life']
+      // const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+      // const profile1 = profiles[Math.floor((Math.random()*profiles.length))]
+    }
     // const out = [];
     const num = 4;
     // const allHobbies = profiles.reduce((pre, cur)=>{
@@ -30,16 +38,19 @@ router.get('/', auth, async(req, res) => {
     //   allHobbies.splice(temp,1)
     // }
     // console.error(out);
-    const hobbies = profile.hobbies || [];
+    console.log(profile);
+    // const hobbies = profile.hobbies || [];
     let results = []
     const hobbie = hobbies[Math.floor((Math.random()*hobbies.length))]
     // const keyword = allHobbies.join(' ')
     const responses = search({
       key:'acfbbc19fbfd4c58810040ea1cfe8e99',
       query: hobbie,
-      amount: 12,
-      width: 200,
-      aspect: 'Wide'
+      amount: 20,
+      width: 300,
+      aspect: 'Wide',
+      nextOffset: offset+15,
+      offset,
     })
     for await (const response of responses) {
       for (const result of response.value) {

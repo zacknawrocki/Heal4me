@@ -8,12 +8,17 @@ import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import {getProfileById} from '../../actions/profile';
+import {Descriptions} from 'antd'
 
 const Profile = ({
                    getProfileById,
                    profile: {profile, loading},
                    auth,
-                   match
+                   match={
+                     params: {
+                       id: ''
+                     }
+                   }
                  }) => {
   useEffect(() => {
     getProfileById(match.params.id);
@@ -25,19 +30,14 @@ const Profile = ({
         <Spinner/>
       ) : (
         <Fragment>
-          <Link to='/profiles' className='btn btn-light'>
-            Back To Profiles
-          </Link>
-          {auth.isAuthenticated &&
-          auth.loading === false &&
-          auth.user._id === profile.user._id && (
-            <Link to='/edit-profile' className='btn btn-dark'>
-              Edit Profile
-            </Link>
-          )}
-          <div className='profile-grid my-1'>
-            <ProfileTop profile={profile}/>
-            <ProfileAbout profile={profile}/>
+          <Descriptions title="User Info" style={{zoom: 1.5}}>
+            <Descriptions.Item label="UserName">{profile.user.name}</Descriptions.Item>
+            <Descriptions.Item label="Gender">{profile.gender}</Descriptions.Item>
+            <Descriptions.Item label="Age">{profile.age}</Descriptions.Item>
+          </Descriptions>
+          <div className='profile-grid' style={{marginTop: '-40px'}}>
+            {/*<ProfileTop profile={profile}/>*/}
+            {/*<ProfileAbout profile={profile}/>*/}
             <div className='profile-exp bg-white p-2'>
               <h2 className='text-primary'>Experience</h2>
               {profile.experience.length > 0 ? (

@@ -7,6 +7,9 @@ import PostItem from '../posts/PostItem';
 import CommentForm from '../post/CommentForm';
 import CommentItem from './CommentItem.js';
 import {getPost} from '../../actions/post';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import {Alert, Button, Form, Input, message} from "antd";
+
 
 const Post = ({getPost, post: {post, loading}, match}) => {
   useEffect(() => {
@@ -18,7 +21,7 @@ const Post = ({getPost, post: {post, loading}, match}) => {
   ) : (
     <Fragment>
       <Link to="/posts" className="btn">
-        Back To Posts
+        <Button icon={<ArrowLeftOutlined />}>Back To Posts</Button>
       </Link>
       <PostItem post={post} showActions={false}/>
       <CommentForm postId={post._id}/>

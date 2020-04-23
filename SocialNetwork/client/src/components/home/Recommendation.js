@@ -26,45 +26,20 @@ const Recommendation = ({getRecommendation, recommendation: {recommendation}}) =
   const [imgs, setImgs] = useState([]);
   const [refresh, setRefresh] = useState('');
   useEffect(() => {
-    getImages().then(res=>{
-      setLoadingImg(false)
-      const searchImgs = res.data.map(v=>{
-        return {
-          src: v.thumbnailUrl,
-          width: 0.5,
-          height: 0.5,
-          hostpageurl: v.hostPageUrl
-        }
-      })
-      setImgs(searchImgs)
-    })
-    getRecommendation().then(res=>{
-      setLoadingRec(false);
-    })
+    fetchSimiliar()
   }, [getRecommendation]);
   
   const openImageBox = (evt, obj)=>{
     window.open(obj.photo.hostpageurl, '_blank')
   }
-  
-  const refreshRecommendation = ()=>{
-    setRefresh('recommendation')
-  
-    getImages().then(()=>{
-      message.success('Recommendation refreshed successfully!')
-    }).catch(()=>{
-      message.error('Recommendation refresh failed!')
-    }).finally(()=>{
-      setRefresh('')
-    });
-  }
-  const refreshSimiliar = ()=>{
+  const fetchSimiliar = ()=>{
     setRefresh('similiar')
     getRecommendation().then(()=>{
-      message.success('Similiar posts refreshed successfully!')
+      message.success('Similiar posts fetched successfully!')
     }).catch(()=>{
-      message.error('Refresh failed!')
+      message.error('Similiar posts fetched failed!')
     }).finally(()=>{
+      setLoadingRec(false);
       setRefresh('')
     })
   }
@@ -77,36 +52,27 @@ const Recommendation = ({getRecommendation, recommendation: {recommendation}}) =
           <div className="gallery">
             <div className="recommendation">
               <Alert message={
-                <div>Similiar posts</div>
+                <div style={{display: 'flex'}}>
+                  Similiar posts
+                  <SyncOutlined spin={refresh === 'similiar'} className="refresh" style={{ color: '#52c41a' }}
+                                onClick={fetchSimiliar}/>
+                </div>
               }/>
-              <SyncOutlined spin={refresh === 'similiar'} className="refresh" style={{ color: '#52c41a' }}
-                            onClick={refreshSimiliar}/>
               {loadingRec && <Spin size={"large"}/>}
               {!loadingRec &&
               <div className='recommendation'>
                 {recommendation && shuffle(recommendation) && recommendation.map(post => {
-                  const wordArr = post.text.split(' ');
-                  if (wordArr.length > 50) {
+                  if (post.text) {
+                    const wordArr = post.text.split(' ');
+                    if (wordArr.length > 50) {
                       post.text = wordArr.splice(0, 50).join(' ') + " ...";
+                    }
                   }
                   return (
                     <PostItem key={post._id} post={post} isHome={true}/>
                   )
               })}
               </div>}
-            </div>
-  
-            <div className="gallery-content">
-              <Alert message={
-                <div>
-                  Recommendation
-                </div>
-              }/>
-              <SyncOutlined spin={refresh === 'recommendation'} className="refresh" style={{  }}
-                            onClick={refreshRecommendation}/>
-              {loadingImg && <Spin size={"large"}/>}
-              {!loadingImg && 
-              <Gallery photos={imgs} onClick={openImageBox}/>}
             </div>
           </div>
         </div>
