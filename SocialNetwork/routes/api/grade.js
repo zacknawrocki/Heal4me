@@ -9,6 +9,12 @@ router.get('/', auth, async(req, res) => {
       try {
         createdPosts = await Post.find({user: req.user.id}, 'text');
         
+        const user = await User.findById(req.user.id);
+        
+        res.json({
+          grade: user.psych_score
+        });
+        
         const path = require('path');
         const {spawn} = require('child_process');
         const subprocess = spawn('python',
@@ -16,20 +22,22 @@ router.get('/', auth, async(req, res) => {
             JSON.stringify(createdPosts)]);
         
         let result = "";
+        let grade = 0.0;
         subprocess.stdout.on('data', (data) => {
           result += data.toString();
         });
         subprocess.stderr.on('data', (data) => {
           console.log(`error:\n${data}\n`);
         });
-        subprocess.stderr.on('close', () => {
+        subprocess.stderr.on('close', async () => {
           console.log(result);
+          grade = parseFloat(result * 100.0);
+          
+          user.psych_score = grade;
+          console.log("SCORE:" + user.psych_score);
+          await user.save();
         });
-        
 
-        res.json({
-          grade: 80
-        });
         
       } catch (err) {
         console.error(err.message);

@@ -19,5 +19,11 @@ export const getImages = () => {
 }
 
 export const getGrade = () => {
-  return service.get('/api/grade')
+   return new Promise(function(resolve, reject) {
+    service.get('/api/grade').then(res=>{
+      resolve(res.data);
+    }).catch(err => {
+      reject(err);
+    });
+  });
 }

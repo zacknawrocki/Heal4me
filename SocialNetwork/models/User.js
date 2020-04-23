@@ -28,7 +28,11 @@ const UserSchema = new mongoose.Schema({
                 ref: 'post'
             }
         }
-    ]
+    ],
+    psych_score: {
+        type: Number,
+        default: 100
+    }
 });
 
 module.exports = User = mongoose.model('user', UserSchema)

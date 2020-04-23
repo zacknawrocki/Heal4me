@@ -6,14 +6,14 @@ import {Alert, Spin, message} from "antd";
 import {getGrade} from "../../actions/home";
 
 const PsychologicalCounseling = (props) => {
-  const [grade, setGrade] = useState(10);
+  const [grade, setGrade] = useState(10.0);
 
   useEffect(() => {
     getGrade().then(res=>{
+      console.log(res);
       setGrade(res.grade)
     })
   }, []);
-  
   const goTo = (type)=>{
     switch (type) {
       case 1:
@@ -27,11 +27,10 @@ const PsychologicalCounseling = (props) => {
         break;
     }
   }
-  
   return (
     <div>
       {
-        grade>7? (
+        grade < 50 ? (
           <div className="footer">
             <Alert message={
               <div>
