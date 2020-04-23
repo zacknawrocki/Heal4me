@@ -4,16 +4,18 @@ const app = express();
 const fs = require('fs')
 require('./socket/io');
 
-const modelPath = './recommender/m.pkl';
+const modelPath = './recommender/classifier.pkl';
 
 try {
-  if (fs.existsSync(modelPath)) {
-    console.log("Exists");
+  if (!fs.existsSync(modelPath)) {
+    const path = require('path');
+    const {spawn} = require('child_process');
+    spawn('python', [path.join(__dirname, './recommender/sentiment_classifier.py'),
+      './recommender/si_data_sorted.csv']);
   }
 } catch(err) {
-    console.error(err)
+  console.error(err)
 }
-
 // Connect Database
 connectDB();
 
