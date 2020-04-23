@@ -86,12 +86,18 @@ export const deletePost = id => async dispatch => {
 
 // Add post
 export const addPost = formData => async dispatch => {
-  service.post('/api/posts', formData).then(res=>{
-    dispatch({
-      type: ADD_POST,
-      payload: res.data
+  return new Promise(function(resolve, reject) {
+    service.post('/api/posts', formData).then(res=>{
+      dispatch({
+        type: ADD_POST,
+        payload: res.data
+      });
+      console.log(formData);
+      resolve(res.data);
+    }).catch(err => {
+      reject(err);
     });
-  })
+  });
 };
 
 // Get post

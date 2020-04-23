@@ -18,8 +18,8 @@ if (localStorage.token) {
  */
 service.interceptors.response.use(res => {
   // response to data
-  console.log(res, 222);
-  return res
+  // console.log(res, 222);
+  return res;
 }, err => {
   const msg = err.response.data?.msg
   // response to errors

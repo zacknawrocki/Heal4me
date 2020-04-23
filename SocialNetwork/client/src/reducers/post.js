@@ -23,7 +23,6 @@ export default function (state = initialState, action) {
   
   switch (type) {
     case GET_MY_POSTS:
-      console.log('setting', payload)
       return {
         ...state,
         loading: false,

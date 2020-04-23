@@ -122,3 +122,37 @@
     }
   }
 }
+
+#modal .modal-content {
+  height: auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 4px;
+  z-index: 20;
+}
+#modal .close {
+  position: relative;
+  float: right;
+  font-size: 18px;
+  transition: transform 500ms ease;
+  z-index: 11;
+}
+#modal .close:hover {
+  color: #3498db;
+  transform: rotate(540deg);
+}
+#modal .modal-header {
+  position: relative;
+  display: block;
+}
+#modal .modal-header h2 {
+  margin: 0 0 10px;
+  padding: 0;
+  font-size: 28px;
+  text-align: center;
+}
+
+#modal {
+  box-shadow: 5px 10px 18px #888888;
+  padding: 5px;
+}

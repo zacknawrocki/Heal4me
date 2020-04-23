@@ -7,7 +7,8 @@ const User = require('../../models/User');
 const Post = require('../../models/Post');
 const Profile = require('../../models/Profile');
 
-const anonID = '5ea19d468e390b6b8b7eedef';
+const config = require('config');
+const anonID = config.get('anonID');
 
 // @desc   Helper function for finding an object with a property containing the given value
 function findPropertyInArrayOfObjects(arr, propName, value) {
@@ -31,7 +32,7 @@ router.get('/my', [auth, [
 // @route  POST api/posts
 // @desc   Create a post
 // @access Private
-router.post('/', [
+router.post('/', auth, [
     check('text', 'Text is required').not().isEmpty()
 ],
 async(req, res) => {
@@ -65,7 +66,7 @@ async(req, res) => {
 // @route  GET api/posts
 // @desc   Get all posts
 // @access Public
-router.get('/', async(req, res) => {
+router.get('/', auth, async(req, res) => {
     try {
         const posts = await Post.find().sort({ date: -1 });
         res.json(posts);

@@ -1,5 +1,6 @@
 {
     "mongoURI": "mongodb+srv://fuk:fuk@heal4me-ja80h.mongodb.net/test?retryWrites=true&w=majority",
     "mongoURI-Test": "mongodb+srv://fuk:fuk@heal4me-ja80h.mongodb.net/heal4me_test?retryWrites=true&w=majority",
-    "jwtSecret": "mysecrettoken"
+    "jwtSecret": "mysecrettoken",
+    "anonID": "5ea19d468e390b6b8b7eedef"
 }
