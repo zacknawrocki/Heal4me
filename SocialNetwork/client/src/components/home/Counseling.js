@@ -30,7 +30,7 @@ const PsychologicalCounseling = (props) => {
   return (
     <div>
       {
-        grade<5? (
+        grade<50? (
           <div className="footer">
             <Alert message={
               <div>
