@@ -19,11 +19,5 @@ export const getImages = ({offset}) => {
 }
 
 export const getGrade = () => {
-   return new Promise(function(resolve, reject) {
-    service.get('/api/grade').then(res=>{
-      resolve(res.data);
-    }).catch(err => {
-      reject(err);
-    });
-  });
+  return service.get('/api/grade')
 }

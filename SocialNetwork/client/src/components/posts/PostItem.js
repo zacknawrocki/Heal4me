@@ -1,13 +1,11 @@
-import React, {Fragment, useEffect, useState, createElement} from 'react';
+import React, {createElement, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import { Comment, Tooltip, Avatar, Button, Popconfirm } from 'antd';
+import {Avatar, Comment, Popconfirm, Tooltip} from 'antd';
 import moment from "moment";
-import Moment from 'react-moment';
 import {connect} from 'react-redux';
 import {addLike, deletePost, removeLike} from '../../actions/post';
-import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled, CloseOutlined } from '@ant-design/icons';
-import classnames from 'classnames'
+import {DislikeFilled, DislikeOutlined, LikeFilled, LikeOutlined} from '@ant-design/icons';
 
 const PostItem = ({
                     addLike,
@@ -45,18 +43,16 @@ const PostItem = ({
   };
   
   const actions = [
-    <span key="comment-basic-like">
+    <span key="comment-basic-like" onClick={like}>
       <Tooltip title="Like">
         {createElement(action === 'liked' ? LikeFilled : LikeOutlined, {
-          onClick: like,
         })}
       </Tooltip>
       <span className="comment-action">{likes?.length}</span>
     </span>,
-    <span key="comment-basic-dislike">
+    <span key="comment-basic-dislike" onClick={dislike}>
       <Tooltip title="Dislike">
         {React.createElement(action === 'disliked' ? DislikeFilled : DislikeOutlined, {
-          onClick: dislike,
         })}
       </Tooltip>
       {/*<span className="comment-action">{dislikes}</span>*/}

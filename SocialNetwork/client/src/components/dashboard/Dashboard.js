@@ -3,15 +3,12 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Spinner from '../layout/Spinner';
-import DashboardActions from './DashboardActions';
 import AddExperience from '../profile-forms/AddExperience';
 import AddEducation from '../profile-forms/AddEducation';
-import {Form, Input, Upload, Button, PageHeader, message, Tabs, Popconfirm, Alert} from "antd";
+import {Alert, Button, PageHeader, Popconfirm, Tabs} from "antd";
 import {deleteAccount, getCurrentProfile} from '../../actions/profile';
-import {SettingOutlined,DeleteOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
+import {DeleteOutlined, SettingOutlined} from '@ant-design/icons'
 import MyPosts from "../home/Myposts";
-import Recommendation from "../home/Recommendation";
-import PsychologicalCounseling from "../home/Counseling";
 import EditProfile from "../profile-forms/EditProfile";
 import Profile from "../profile/Profile";
 
@@ -24,19 +21,26 @@ const Dashboard = ({
                      profile: {profile, loading}
                    }) => {
   
-  const [defaultTab, setDefaultTab] = useState('MyPosts');
+  const [defaultTab, setDefaultTab] = useState('Profile');
   
-  const handleDeleteAccount = ()=>{
-    deleteAccount().then(res=>{
+  const handleDeleteAccount = () => {
+    deleteAccount().then(res => {
     
     })
   }
   
   useEffect(() => {
-    getCurrentProfile().then(res=>{
-    
-    });
-  }, [getCurrentProfile]);
+    getCurrentProfile()
+  }, []);
+  
+  const canRender =  profile && profile._id
+  
+  const handleS = (val)=>{
+    setDefaultTab(val)
+    if (val === 'Profile') {
+      getCurrentProfile()
+    }
+  }
   
   return loading && !profile ? (
     <Spinner/>
@@ -45,26 +49,42 @@ const Dashboard = ({
       <PageHeader
         ghost={false}
         title={
-           <div><SettingOutlined />User Settings</div>
+          <div><SettingOutlined/>User Settings</div>
         }
       >
       </PageHeader>
       <div className="settings-content">
-        {
-          profile !== undefined && profile !== null ?(
             <Fragment>
-              <Tabs type="card">
+              <Tabs type="card" activeKey={defaultTab} onChange={val=>handleS(val)}>
                 <TabPane tab="Profile" key="Profile">
-                  <Profile />
+                  {
+                    profile && profile._id? (
+                      <Profile userId={user._id}/>
+                    ): (
+                      <Fragment>
+                        <Alert message="You have not yet setup a profile, please add some info"/>
+                        <br/>
+                        <Button type="primary" onClick={()=>setDefaultTab('EditProfile')}>Create Profile</Button>
+                      </Fragment>
+                    )
+                  }
                 </TabPane>
                 <TabPane tab="Edit Profile" key="EditProfile">
-                  <EditProfile />
+                  <EditProfile tab={defaultTab}/>
                 </TabPane>
                 <TabPane tab="Add Experience" key="AddExperience">
-                  <AddExperience experience={profile.experience}/>
+                  {
+                    profile && profile._id? (
+                      <AddExperience experience={profile.experience}/>
+                    ): null
+                  }
                 </TabPane>
                 <TabPane tab="Add Education" key="AddEducation">
-                  <AddEducation education={profile.education}/>
+                  {
+                    profile && profile._id?(
+                      <AddEducation education={profile.education}/>
+                    ) :null
+                  }
                 </TabPane>
               </Tabs>
               {/*<DashboardActions/>*/}
@@ -74,23 +94,9 @@ const Dashboard = ({
                 okText="Yes"
                 cancelText="No"
               >
-                <Button type="danger" icon={<DeleteOutlined />}>Delete My Account</Button>
+                <Button type="danger" icon={<DeleteOutlined/>}>Delete My Account</Button>
               </Popconfirm>
-              
-              {/*<div className='my-2'>*/}
-              {/*  <button className='btn btn-danger' onClick={() => deleteAccount()}>*/}
-              {/*    <i className='fas fa-user-minus'/> */}
-              {/*  </button>*/}
-              {/*</div>*/}
             </Fragment>
-          ) : (
-            <Fragment>
-              <Alert message="You have not yet setup a profile, please add some info" />
-              <Link to='/edit-profile?type=edit'>
-                <Button type="success">Create Profile</Button>
-              </Link>
-            </Fragment>
-          )}
       </div>
     </Fragment>
   );

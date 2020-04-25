@@ -1,12 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Spinner from '../layout/Spinner';
-import {getImages, getRecommendation, getGrade} from '../../actions/home';
+import {getRecommendation} from '../../actions/home';
 import PostItem from '../posts/PostItem';
-import Gallery from "react-photo-gallery";
-import {Alert, Spin, message} from "antd";
-import {SyncOutlined,UserOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
+import {Alert, message, Spin} from "antd";
+import {SyncOutlined} from '@ant-design/icons'
 
 /**
  * Shuffles array in place. ES6 version
@@ -37,7 +35,7 @@ const Recommendation = ({getRecommendation, recommendation: {recommendation}}) =
     getRecommendation().then(()=>{
       message.success('Similiar posts fetched successfully!')
     }).catch(()=>{
-      message.error('Similiar posts fetched failed!')
+      message.error('Fail to fetch similiar posts!')
     }).finally(()=>{
       setLoadingRec(false);
       setRefresh('')

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { FiHeart } from 'react-icons/fi';
-import {Card, Descriptions} from "antd";
-import {SettingOutlined,EditOutlined, EllipsisOutlined,LockOutlined } from '@ant-design/icons'
+import {FiHeart} from 'react-icons/fi';
+import {Card} from "antd";
 
 
 const Meta = Card.Meta

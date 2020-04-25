@@ -1,11 +1,12 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import Recommendation from './Recommendation'
 import PsychologicalCounseling from './Counseling'
 import OtherResources from './OtherResources'
 import MyPosts from './Myposts'
-import {Tabs, } from "antd";
+import {Tabs,} from "antd";
+
 const { TabPane } = Tabs;
 
 const Home = (props) => {

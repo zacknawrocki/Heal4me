@@ -53,7 +53,9 @@ router.get('/', auth, async(req, res) => {
         const user = await User.findById(req.user.id)
             .select('-password')
             .populate('recently_viewed.post');
-        
+      if (!user) {
+        res.status(500)
+      }
         let rv = user.recently_viewed;
         removeNullPropObjectsFromArray(rv, 'post');
         

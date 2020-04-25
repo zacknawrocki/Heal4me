@@ -1,6 +1,5 @@
-import React, {Fragment, useEffect, useState} from 'react';
-import {connect} from 'react-redux';
-import {Alert, Spin, message} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Alert} from "antd";
 
 
 import {getGrade} from "../../actions/home";
@@ -10,10 +9,10 @@ const PsychologicalCounseling = (props) => {
 
   useEffect(() => {
     getGrade().then(res=>{
-      console.log(res);
       setGrade(res.grade)
     })
   }, []);
+  
   const goTo = (type)=>{
     switch (type) {
       case 1:
@@ -27,10 +26,11 @@ const PsychologicalCounseling = (props) => {
         break;
     }
   }
+  
   return (
     <div>
       {
-        grade < 50 ? (
+        grade<5? (
           <div className="footer">
             <Alert message={
               <div>

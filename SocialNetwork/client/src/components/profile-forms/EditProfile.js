@@ -1,10 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react';
-import {Link, Redirect, withRouter} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createProfile, getCurrentProfile} from '../../actions/profile';
-import {Form, PageHeader, Icon, Collapse, Input, Select, Checkbox, Button, DatePicker} from "antd";
-import { FaGraduationCap, FaBuilding } from 'react-icons/fa';
+import {Button, Collapse, Form, Input, PageHeader, Select, message} from "antd";
+import {FaGraduationCap} from 'react-icons/fa';
 
 const FormItem = Form.Item
 const { Option } = Select;
@@ -26,57 +26,45 @@ const initialState = {
   instagram: ''
 };
 
-console.log(window.location);
-
 const EditProfile = ({
                        createProfile,
                        getCurrentProfile,
                        profile: {profile, loading},
-                       history
+                       history,
+                       tab
                      }) => {
   let type = profile?'edit': 'create';
-  const [form, setForm] = Form.useForm();
-  const [formData, setFormData] = useState(initialState);
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
-  const {
-    company,
-    website,
-    location,
-    gender,
-    age,
-    occupation,
-    hobbies,
-    bio,
-    twitter,
-    facebook,
-    linkedin,
-    youtube,
-    instagram
-  } = formData;
-  const onChange = e =>
-    setFormData({...formData, [e.target.name]: e.target.value});
-  
-  const formRef = React.createRef();
+  const [form] = Form.useForm();
+  const formRef = React.useRef();
   const onSubmit = (values) => {
     values.hobbies = values.hobbies.join(',')
-    createProfile(Object.assign(initialState, values), history, type === 'edit');
+    Object.keys(initialState).map(v=>{
+      initialState[v] =  values[v] || ''
+    })
+    createProfile(initialState, history, type === 'edit').then(res=>{
+      message.success('submit success')
+      console.log(formRef.current);
+      formRef.current.resetFields();
+    });
   };
   
   useEffect(() => {
-    if (!profile) getCurrentProfile();
-    if (!loading) {
-      const profileData = {...initialState};
-      for (const key in profile) {
-        if (key in profileData) profileData[key] = profile[key];
+    formRef.current.resetFields();
+    getCurrentProfile();
+    console.log(profile);
+    if (profile){
+      if (!loading) {
+        const profileData = {...initialState};
+        for (const key in profile) {
+          if (key in profileData) profileData[key] = profile[key];
+        }
+        for (const key in profile.social) {
+          if (key in profileData) profileData[key] = profile.social[key];
+        }
+        formRef.current.setFieldsValue(profileData);
       }
-      for (const key in profile.social) {
-        if (key in profileData) profileData[key] = profile.social[key];
-      }
-      // setFormData(profileData);
-      formRef.current.setFieldsValue(profileData);
-      // setFormData(profileData)
-    }
-  }, [loading, getCurrentProfile, profile]);
+    };
+  }, [history, tab]);
   
   const title = 'Your Profile'
   const subTitle = type === 'edit'? 'Add some changes to your profile': 'Let\' s start from here!'
@@ -109,7 +97,7 @@ const EditProfile = ({
           >
             <Option value='0'>* Select your occupation</Option>
             <Option value='Teacher'>Teacher</Option>
-            <Option value='Teacher'>Student</Option>
+            <Option value='Student'>Student</Option>
             <Option value='Mechanic'>Mechanic</Option>
             <Option value='Artist'>Artist</Option>
             <Option value='administrator'>Administrator</Option>
@@ -142,8 +130,8 @@ const EditProfile = ({
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }>
             <Option value='0'>Gender</Option>
-            <Option value='Man'>Male</Option>
-            <Option value='Woman'>Female</Option>
+            <Option value='Male'>Male</Option>
+            <Option value='Female'>Female</Option>
             <Option value='Genderqueer'>Genderqueer/Non-Binary</Option>
             <Option value='Unknown'>Prefer not to disclose</Option>
           </Select>
@@ -211,7 +199,7 @@ const EditProfile = ({
 
         </FormItem>
         <FormItem wrapperCol={{ offset: 8 }}>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={loading}>
             Submit
           </Button>
         </FormItem>

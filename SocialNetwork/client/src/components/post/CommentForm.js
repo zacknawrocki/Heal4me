@@ -24,7 +24,7 @@ const CommentForm = ({postId, addComment}) => {
       <Alert message="Comment the post" type="info" showIcon />
       <Form className="form my-1" onFinish={handleAddComment}>
         <FormItem rules={[{required: true, message: 'Please input your Comment!'}]}>
-          <Input.TextArea placeholder='Please leave your comment' value={text}
+          <Input.TextArea placeholder='Please leave a comment' value={text}
                           autoSize={{minRows: 3, maxRows: 6}}
                           onChange={event => setText(event.target.value)}/>
         </FormItem>

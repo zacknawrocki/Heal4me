@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Table} from 'antd';
 import store from "../../store";
+import moment from "moment";
 
 export default class AddModal extends Component {
   
@@ -25,6 +26,7 @@ export default class AddModal extends Component {
         title: 'Time Registered',
         dataIndex: 'date',
         key: 'date',
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
     ];
   };
@@ -32,7 +34,7 @@ export default class AddModal extends Component {
   handleOk = () => {
     const {user_id, selectedId} = this.state;
     this.props.handleOk({
-      user_id,
+      user_id: store.getState().auth.user._id,
       selectedId,
       changeSelectId: this.changeSelectId
     });

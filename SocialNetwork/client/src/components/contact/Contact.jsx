@@ -30,7 +30,7 @@ export default class Contact extends Component {
     userList: [],
     showContact: false,
     friendId: '',
-    socket: Socket(store.getState().auth.user._id),
+    socket: '',
     searchList: [],
     inputValue: '',
     searchFlag: 0,
@@ -186,6 +186,7 @@ export default class Contact extends Component {
   };
   
   handleOk = (select) => {
+    console.log(select);
     const {user_id, selectedId, changeSelectId} = select;
     const friendsObj = [];
     if (selectedId.length === 0) {
@@ -362,10 +363,16 @@ export default class Contact extends Component {
   };
   
   componentDidMount() {
-    this.getFriendsList();
-    this.eventBind();
-    this.getNotification();
-    this.getGroupList();
+    // console.log(store.getState().auth.user._id);
+    this.setState({
+      socket: Socket(localStorage.getItem('user_id'))
+    }, () => {
+      this.getFriendsList();
+      this.eventBind();
+      this.getNotification();
+      this.getGroupList();
+    })
+    
   }
   
   render() {
@@ -451,10 +458,7 @@ export default class Contact extends Component {
           </TabPane>
           <TabPane
             tab={
-              <span>
-                          <TeamOutlined/>
-                          My Groups
-                        </span>
+              <span><TeamOutlined/>My Groups</span>
             }
             key="2"
           >

@@ -43,15 +43,22 @@ async(req, res) => {
     }
 
     try {
-        const userid = req.user !== undefined ? req.user.id : anonID;
+        const userid = req.user && req.user.id ? req.user.id : anonID;
         const user = await User.findById(userid).select('-password');
-
-        const newPost = new Post({
-            text: req.body.text,
-            name: user.name,
-            avatar: user.avatar,
-            user: userid
-        });
+      let option = {
+        text: req.body.text,
+        // name: 'anonymous',
+        // avatar: '',
+        // user:
+      }
+      if (user) {
+        option = Object.assign({}, option, {
+          name: user.name,
+          avatar: user.avatar,
+          user: userid
+        })
+      }
+        const newPost = new Post(option);
         
         const post = await newPost.save();
 

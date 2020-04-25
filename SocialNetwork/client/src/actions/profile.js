@@ -6,7 +6,7 @@ import service from "../api";
 // Get current user's profile
 export const getCurrentProfile = () => dispatch => {
   return service('/api/profile/me').then(res => {
-    dispatch({
+    return dispatch({
       type: GET_PROFILE,
       payload: res.data || []
     });

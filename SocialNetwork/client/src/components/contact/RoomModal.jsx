@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Input, Modal, Table} from 'antd';
 import store from "../../store";
+import moment from "moment";
 
 export default class RoomModal extends Component {
   
@@ -26,6 +27,7 @@ export default class RoomModal extends Component {
         title: 'Register Timestamp',
         dataIndex: 'date',
         key: 'date',
+        render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
     ];
   };

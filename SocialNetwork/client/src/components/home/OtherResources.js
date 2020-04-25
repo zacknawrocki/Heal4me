@@ -1,12 +1,10 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Spinner from '../layout/Spinner';
-import {getImages, getRecommendation, getGrade} from '../../actions/home';
-import PostItem from '../posts/PostItem';
+import {getImages, getRecommendation} from '../../actions/home';
 import Gallery from "react-photo-gallery";
-import {Alert, Spin, message} from "antd";
-import {SyncOutlined,UserOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
+import {Alert, message, Spin} from "antd";
+import {SyncOutlined} from '@ant-design/icons'
 
 
 const OtherResources = ({getRecommendation, recommendation: {recommendation}}) => {
@@ -18,11 +16,11 @@ const OtherResources = ({getRecommendation, recommendation: {recommendation}}) =
   useEffect(() => {
     fetchRecommendation({offset})
   }, [getRecommendation]);
-  
+
   const openImageBox = (evt, obj)=>{
     window.open(obj.photo.hostpageurl, '_blank')
   }
-  
+
   const fetchRecommendation = ()=>{
     setRefresh('recommendation')
     getImages({offset: offset + 15}).then((res)=>{
@@ -36,16 +34,16 @@ const OtherResources = ({getRecommendation, recommendation: {recommendation}}) =
         }
       })
       setImgs(searchImgs)
-      message.success('fetch Recommendation successfully!')
+      message.success('Recommendation fetched successfully!')
     }).catch(()=>{
-      message.error('fetch Recommendatio failed!')
+      message.error('Fail to fetch recommendation!')
     }).finally(()=>{
       setLoadingImg(false)
       setRefresh('')
     });
   }
-  
-  
+
+
   return  (
     <Fragment>
       {
@@ -66,7 +64,7 @@ const OtherResources = ({getRecommendation, recommendation: {recommendation}}) =
           </div>
         </div>
       }
-    
+
     </Fragment>
   );
 };

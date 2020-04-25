@@ -1,12 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Spinner from '../layout/Spinner';
 import ProfileItem from './ProfileItem';
-import { getProfiles } from '../../actions/profile';
-import { FaSearchengin } from 'react-icons/fa';
+import {getProfiles} from '../../actions/profile';
 import {message, PageHeader, Spin} from "antd";
-import {SettingOutlined,UserOutlined, MailOutlined,LockOutlined,SearchOutlined } from '@ant-design/icons'
+import {SearchOutlined, UserOutlined} from '@ant-design/icons'
 import service from "../../api";
 
 

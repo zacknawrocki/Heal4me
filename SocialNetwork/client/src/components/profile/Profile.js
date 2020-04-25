@@ -1,10 +1,7 @@
 import React, {Fragment, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import Spinner from '../layout/Spinner';
-import ProfileTop from './ProfileTop';
-import ProfileAbout from './ProfileAbout';
 import ProfileExperience from './ProfileExperience';
 import ProfileEducation from './ProfileEducation';
 import {getProfileById} from '../../actions/profile';
@@ -14,6 +11,7 @@ const Profile = ({
                    getProfileById,
                    profile: {profile, loading},
                    auth,
+                   userId,
                    match={
                      params: {
                        id: ''
@@ -21,27 +19,26 @@ const Profile = ({
                    }
                  }) => {
   useEffect(() => {
-    getProfileById(match.params.id);
+    getProfileById(match.params.id || auth.user._id || localStorage.getItem('user_id'));
   }, [getProfileById, match.params.id]);
-
-  console.log(profile);
+  
   return (
     <Fragment>
-      {profile.success === false || loading ? (
+      {profile === null || loading ? (
         <Spinner/>
       ) : (
         <Fragment>
           <Descriptions title="User Info" style={{zoom: 1.5}}>
-            <Descriptions.Item label="UserName">{profile.user.name}</Descriptions.Item>
-            <Descriptions.Item label="Gender">{profile.gender}</Descriptions.Item>
-            <Descriptions.Item label="Age">{profile.age}</Descriptions.Item>
+            <Descriptions.Item label="UserName">{profile.user?.name}</Descriptions.Item>
+            <Descriptions.Item label="Gender">{profile?.gender}</Descriptions.Item>
+            <Descriptions.Item label="Age">{profile?.age}</Descriptions.Item>
           </Descriptions>
           <div className='profile-grid' style={{marginTop: '-40px'}}>
             {/*<ProfileTop profile={profile}/>*/}
             {/*<ProfileAbout profile={profile}/>*/}
             <div className='profile-exp bg-white p-2'>
               <h2 className='text-primary'>Experience</h2>
-              {profile.experience.length > 0 ? (
+              {profile.experience?.length > 0 ? (
                 <Fragment>
                   {profile.experience.map(experience => (
                     <ProfileExperience
@@ -57,7 +54,7 @@ const Profile = ({
             
             <div className='profile-edu bg-white p-2'>
               <h2 className='text-primary'>Education</h2>
-              {profile.education.length > 0 ? (
+              {profile.education?.length > 0 ? (
                 <Fragment>
                   {profile.education.map(education => (
                     <ProfileEducation

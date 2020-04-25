@@ -94,8 +94,8 @@ const CreateProfile = ({
         <div className='form-group'>
           <select name='gender' value={gender} onChange={e => onChange(e)}>
             <option value='0'>Gender</option>
-            <option value='Man'>Male</option>
-            <option value='Woman'>Female</option>
+            <option value='Male'>Male</option>
+            <option value='Female'>Female</option>
             <option value='Genderqueer'>Genderqueer/Non-Binary</option>
             <option value='Unknown'>Prefer not to disclose</option>
           </select>

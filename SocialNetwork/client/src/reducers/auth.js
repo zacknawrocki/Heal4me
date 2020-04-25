@@ -8,6 +8,7 @@ import {
   REGISTER_SUCCESS,
   USER_LOADED
 } from '../actions/types';
+import setAuthToken from "../utils/setAuthToken";
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -21,6 +22,7 @@ export default function (state = initialState, action) {
   switch (type) {
     case USER_LOADED:
       console.log(payload);
+      localStorage.setItem('user_id', payload._id);
       return {
         ...state,
         isAuthenticated: true,
@@ -42,6 +44,8 @@ export default function (state = initialState, action) {
     case LOGOUT:
     case ACCOUNT_DELETED:
       localStorage.removeItem('token');
+      localStorage.removeItem('user_id');
+      setAuthToken('');
       return {
         ...state,
         token: null,

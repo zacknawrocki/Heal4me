@@ -1,11 +1,10 @@
-import React, {Fragment, useState} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import React, {Fragment, useState, useRef} from 'react';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {addEducation} from '../../actions/profile';
-import {Form, PageHeader, Icon, Input, Checkbox, Button, DatePicker, Switch} from "antd";
-// import Education from '../../img/education.svg'
-import { FaGraduationCap, FaBuilding } from 'react-icons/fa';
+import {Button, DatePicker, Form, Input, PageHeader, Switch} from "antd";
+import {FaBuilding, FaGraduationCap} from 'react-icons/fa';
 
 const { RangePicker } = DatePicker;
 
@@ -13,17 +12,19 @@ const FormItem = Form.Item
 
 const AddEducation = ({addEducation, history}) => {
   const [form] = Form.useForm();
-  
   const [toDateDisabled, toggleDisabled] = useState(false);
+  const formRef = React.useRef();
   
   const onSubmit = (values) =>{
-    addEducation(values, history);
-  }
+    addEducation(values, history).then(res=>{
+      formRef.current.resetFields();
   
+    });
+    
+  }
   
   const change = (val)=>{
     toggleDisabled(val)
-    console.log(val);
   }
   
   return (
@@ -34,8 +35,6 @@ const AddEducation = ({addEducation, history}) => {
       >
       </PageHeader>
       
-      
-      
       <PageHeader
         ghost={false}
         title="Add Your Education"
@@ -45,7 +44,7 @@ const AddEducation = ({addEducation, history}) => {
         }
       >
       </PageHeader>
-      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} form={form}
+      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} form={form} ref={formRef}
             name="control-hooks" onFinish={onSubmit} scrollToFirstError>
         <Form.Item name="school" label="School" rules={[{ required: true }]}>
           <Input placeholder="School or Bootcamp" prefix={<FaBuilding />} />
@@ -69,7 +68,7 @@ const AddEducation = ({addEducation, history}) => {
           <Input.TextArea placeholder='Program Description'
                           autoSize={{minRows: 3, maxRows: 6}}/>
         </FormItem>
-      
+
         <Form.Item wrapperCol={{ offset: 8 }}>
           <Button type="primary" htmlType="submit">
             Submit

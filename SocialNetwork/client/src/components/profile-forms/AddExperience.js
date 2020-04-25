@@ -1,11 +1,11 @@
 import React, {Fragment, useState} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {addExperience} from '../../actions/profile';
-import {Form, PageHeader, Switch, Checkbox, Input, Button, DatePicker} from "antd";
+import {Button, DatePicker, Form, Input, PageHeader, Switch} from "antd";
 // import Education from '../../img/education.svg'
-import { FaGraduationCap, FaBuilding } from 'react-icons/fa';
+import {FaBuilding} from 'react-icons/fa';
 
 const FormItem = Form.Item
 
@@ -21,6 +21,7 @@ const AddExperience = ({addExperience, history}) => {
   });
   const [form] = Form.useForm();
   
+  const formRef = React.useRef();
   
   const [toDateDisabled, toggleDisabled] = useState(false);
   
@@ -31,7 +32,9 @@ const AddExperience = ({addExperience, history}) => {
   
   const onSubmit = (values) =>{
     console.log(values);
-    addExperience(values, history);
+    addExperience(values, history).then(res=>{
+      formRef.current.resetFields();
+    });
   }
   
   const change = (val)=>{
@@ -51,7 +54,7 @@ const AddExperience = ({addExperience, history}) => {
       >
       </PageHeader>
   
-      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} form={form}
+      <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} form={form} ref={formRef}
             name="control-hooks" onFinish={onSubmit} scrollToFirstError>
         <Form.Item name="title" label="Job Title" rules={[{ required: true }]}>
           <Input placeholder="Job Title" prefix={<FaBuilding />} />

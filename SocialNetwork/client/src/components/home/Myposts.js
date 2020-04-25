@@ -2,23 +2,22 @@ import React, {Fragment, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import Spinner from '../layout/Spinner';
-import {Alert, Spin, message} from "antd";
+import {Spin} from "antd";
 
 
 import PostItem from '../posts/PostItem';
-import {getMyPosts, } from '../../actions/post';
+import {getMyPosts,} from '../../actions/post';
 
 const MyPosts = ({getMyPosts, myposts, loading}) => {
 
   useEffect(() => {
     getMyPosts();
   }, []);
-  
+
   return (
     <Fragment>
       {
-        !myposts || myposts === undefined || loading? (<Spin />) :(
+        !myposts || myposts === undefined||loading? (<Spin />) :(
           myposts&& myposts.length > 0 ? myposts.map(post => {
             const wordArr = post.text.split(' ');
             if (wordArr.length > 50) {

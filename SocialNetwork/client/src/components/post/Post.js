@@ -7,8 +7,8 @@ import PostItem from '../posts/PostItem';
 import CommentForm from '../post/CommentForm';
 import CommentItem from './CommentItem.js';
 import {getPost} from '../../actions/post';
-import { ArrowLeftOutlined } from '@ant-design/icons';
-import {Alert, Button, Form, Input, message} from "antd";
+import {ArrowLeftOutlined} from '@ant-design/icons';
+import {Button} from "antd";
 
 
 const Post = ({getPost, post: {post, loading}, match}) => {

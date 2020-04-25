@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import spinner from './spinner.gif';
-import { Spin } from 'antd'
 
 export default () => (
   <Fragment>

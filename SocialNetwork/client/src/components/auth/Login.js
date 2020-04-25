@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, {useState} from 'react';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -27,8 +27,7 @@ const Login = ({login, isAuthenticated, history}) => {
       message.success('login success')
       history.push('/home')
     }).catch(err => {
-      console.log(33333);
-      message.error('login failed')
+      message.error('login failed,reason:' + err.errors[0].msg)
     }).finally(() => {
       setloading(false)
     });

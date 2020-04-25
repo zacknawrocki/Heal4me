@@ -1,11 +1,11 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Link, Redirect, withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {setAlert} from '../../actions/alert';
 import {register} from '../../actions/auth';
 import PropTypes from 'prop-types'
-import {Form, Input, Upload, Button, PageHeader, message} from "antd";
-import {UploadOutlined,UserOutlined, MailOutlined,LockOutlined } from '@ant-design/icons'
+import {Button, Form, Input, message, PageHeader} from "antd";
+import {LockOutlined, MailOutlined, UserOutlined} from '@ant-design/icons'
 
 
 const Register = ({history, setAlert, register, isAuthenticated}) => {
