@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 import '../../styles/index.less';
 
 export default ({ close, postID }) => {
-
     return (
         <div id="modal">
             <a className="close" onClick={close}>
