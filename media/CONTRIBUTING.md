@@ -27,6 +27,9 @@ To setup your environment and get everything running, check out this [article](h
 
 If there is any confusion, or perhaps you are absolutely new to coding, get in contact with the team, and we would love to introduce you to the absolute basics, including the command line, Git, issue tracking, and any other technologies we may have missed. 
 
+### Running the application
+
+To begin, clone the repository into a directory of your choice. Navigate into SocialNetwork/ and run `npm i` to install backend dependencies. After installation has completed, navigate inside client/ and run `npm i` again to install frontend dependencies. Finally, in SocialNetwork/ you can now enter `npm run dev` to start the app. In order for python dependent features, such as recommendations to work, you will additionally need to go to SocialNetwork/recommender and run `pip install` to get nltk, pandas, numpy, sklearn, keras, and tensorflow. Using the dev script, as before, should now allow you to view any ML-generated content.
 
 ## Motivation
 We want to help people struggling with mental illnesses. According to the world health organization, [Around 450 million people currently suffer from mental health disorders](https://www.who.int/whr/2001/media_centre/press_release/en/). We are here to provide help to these individuals in need. Whether our users cannot afford therapy and medication, are not comfortable approaching medical professionals in person, or want to enhance their current treatments, Heal4Me is here to deliver on those wishes.
